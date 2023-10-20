@@ -1,0 +1,32 @@
+.Message {
+  display: flex;
+  justify-content: flex-start;
+
+  &.same-user {
+    justify-content: flex-end;
+  }
+
+  &--text-content {
+    padding: 12px 20px;
+    min-width: 100px;
+    width: fit-content;
+    max-width: 90%;
+    background-color: hsl(260, 80%, 30%);
+    color: hsl(0, 0%, 80%);
+    font-size: 1rem;
+    border-radius: 8px;
+    margin: 0;
+    text-align: start;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    
+    &.same-user {
+      background-color: hsl(200, 80%, 30%);
+      text-align: end;
+    }
+  }
+
+  &--text-sender {
+    font-weight: bold;
+  }
+}
