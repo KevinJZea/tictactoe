@@ -2,13 +2,13 @@
   "name": "tic-tac-toe",
   "version": "1.0.0",
   "description": "TicTacToe Game using React, Node.js and Socket.io",
-  "main": "index.js",
+  "main": "server/index.js",
   "type": "module",
   "author": "Kevin J. Zea",
   "license": "MIT",
   "scripts": {
     "dev": "nodemon server/index.js --ignore client",
-    "build": "yarn --prefix client build",
+    "build": "yarn --cwd ./client build",
     "start": "node server/index.js"
   },
   "dependencies": {
