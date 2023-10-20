@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { socket } from './socket';
 import { Home } from './pages/Home';
 import { ChatButton } from './components/ChatButton';
 import { ChatPortal } from './components/ChatPortal';
@@ -13,6 +14,27 @@ function App() {
     isChatOpen: false,
     messages: [],
   });
+
+  const onInitializeUser = (newUserData) => {
+    setUserData((prevUserData) => ({ ...prevUserData, ...newUserData }));
+  };
+
+  const onNewMessage = (newMessage) => {
+    setSessionData((prevSessionData) => ({
+      ...prevSessionData,
+      messages: [...prevSessionData.messages, newMessage],
+    }));
+  };
+
+  useEffect(() => {
+    socket.on('server:initializeUser', onInitializeUser);
+    socket.on('server:newMessage', onNewMessage);
+
+    return () => {
+      socket.off('server:initializeUser', onInitializeUser);
+      socket.off('server:newMessage', onNewMessage);
+    };
+  }, []);
 
   const toggleChat = () => {
     setSessionData((prevSessionData) => ({
@@ -29,18 +51,12 @@ function App() {
   };
 
   const addMessage = (content) => {
-    setSessionData((prevSessionData) => ({
-      ...prevSessionData,
-      messages: [
-        ...prevSessionData.messages,
-        { sender: userData.username, content },
-      ],
-    }));
+    socket.emit('client:newMessage', { sender: userData.username, content });
   };
 
   return (
     <>
-      {userData.username.length === 0 ? (
+      {userData.username?.length === 0 ? (
         <LoginForm setUserData={setUserData} />
       ) : (
         <Home>
