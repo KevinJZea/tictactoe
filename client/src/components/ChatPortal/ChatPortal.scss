@@ -1,0 +1,106 @@
+.ChatPortal {
+  position: fixed;
+  top: 5vh;
+  bottom: 5vh;
+  left: 5vw;
+  right: 5vw;
+  z-index: 2;
+  border-radius: 12px;
+
+  background-color: hsl(200, 100%, 15%);
+  color: hsl(0, 0%, 100%);
+
+  padding: 10% 5%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+
+  &--exit-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: hsl(0, 0%, 100%);
+    color: hsl(0, 0%, 0%);
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    z-index: 1;
+
+    &:hover {
+      background-color: hsl(0, 0%, 90%);
+    }
+  }
+
+  &--messages-container {
+    padding: 16px 24px;
+    width: 90%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: hsl(200, 100%, 20%);
+    overflow-y: scroll;
+    position: relative;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &--form-container {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+  }
+
+  &--input {
+    padding: 8px 16px;
+    color: hsl(0, 0%, 100%);
+    font-size: 1.2rem;
+    background-color: hsl(200, 100%, 25%);
+    border: none;
+    border-radius: 8px;
+
+    &:hover {
+      background-color: hsl(200, 100%, 30%);
+    }
+
+    &::placeholder {
+      color: hsla(0, 0%, 80%, 0.6);
+    }
+  }
+
+  &--submit-button {
+    cursor: pointer;
+    border: none;
+    font-size: 1.5rem;
+    padding: 16px 36px;
+    background-color: hsl(200, 90%, 10%);
+    border-radius: 12px;
+    color: hsl(0, 0%, 100%);
+
+    &:hover {
+      background-color: hsl(200, 90%, 12%);
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .ChatPortal {
+    &--form-container {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    &--submit-button {
+      font-size: 1.2rem;
+    }
+  }
+}
