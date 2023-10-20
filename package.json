@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon server/index.js --ignore client",
-    "build": "yarn --cwd ./client build",
+    "build": "yarn --cwd ./client install && yarn --cwd ./client build",
     "start": "node server/index.js"
   },
   "dependencies": {
