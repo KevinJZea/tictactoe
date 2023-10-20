@@ -1,0 +1,44 @@
+.LoginForm {
+  padding: 36px 42px;
+  background-color: hsl(0, 0%, 25%);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  &--title {
+    color: hsl(0, 0%, 100%);
+    font-size: 1.6rem;
+  }
+
+  &--input {
+    padding: 8px 16px;
+    color: hsl(0, 0%, 100%);
+    font-size: 1.2rem;
+    background-color: hsl(0, 0%, 40%);
+    border: none;
+    border-radius: 8px;
+
+    &:hover {
+      background-color: hsl(0, 0%, 45%);
+    }
+
+    &::placeholder {
+      color: hsla(0, 0%, 70%, 0.9);
+    }
+  }
+
+  &--button {
+    cursor: pointer;
+    border: 1px solid hsl(0, 0%, 15%);
+    font-size: 1.5rem;
+    padding: 16px 36px;
+    background-color: hsl(0, 0%, 15%);
+    border-radius: 12px;
+    color: hsl(0, 0%, 100%);
+
+    &:hover {
+      background-color: hsl(0, 0%, 20%);
+    }
+  }
+}
