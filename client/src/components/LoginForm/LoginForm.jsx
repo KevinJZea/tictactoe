@@ -1,16 +1,17 @@
 import { useState } from 'react';
+import { socket } from '../../socket';
 import './LoginForm.scss';
 
-export function LoginForm({ setUserData }) {
-  const [textValue, setTextValue] = useState('');
+export function LoginForm() {
+  const [username, setUsername] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setUserData((prevData) => ({ ...prevData, username: textValue }));
+    socket.emit('client:userConnected', username);
   };
 
   const handleChange = (event) => {
-    setTextValue(event.target.value);
+    setUsername(event.target.value);
   };
 
   return (
@@ -31,7 +32,7 @@ export function LoginForm({ setUserData }) {
         placeholder="Type here..."
         required
         type="text"
-        value={textValue}
+        value={username}
         onChange={handleChange}
       />
 
