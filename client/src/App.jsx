@@ -6,6 +6,8 @@ import { ChatButton } from './components/ChatButton';
 import { ChatPortal } from './components/ChatPortal';
 import { LoginForm } from './components/LoginForm';
 import { Message } from './components/Message';
+import { TicTacToe } from './components/TicTacToe';
+import { WinningMessage } from './components/WinningMessage';
 
 import { useAppContext } from './context/useAppContext';
 import { ACTIONS } from './utils/constants';
@@ -14,7 +16,7 @@ import './App.scss';
 
 export function App() {
   const { state, dispatch } = useAppContext();
-  const { isChatOpen, messages, user } = state;
+  const { draw, isChatOpen, messages, user, winner } = state;
 
   const onInitializeUser = (newUserData) => {
     dispatch({ type: ACTIONS.UPDATE_USER, payload: newUserData });
@@ -52,6 +54,8 @@ export function App() {
         <LoginForm />
       ) : (
         <Home>
+          <TicTacToe />
+          {winner || draw ? <WinningMessage /> : null}
           <ChatButton onClick={toggleChat} />
           {isChatOpen ? (
             <ChatPortal
