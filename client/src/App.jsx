@@ -1,29 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { socket } from './socket';
+
 import { Home } from './pages/Home';
 import { ChatButton } from './components/ChatButton';
 import { ChatPortal } from './components/ChatPortal';
 import { LoginForm } from './components/LoginForm';
 import { Message } from './components/Message';
+
+import { useAppContext } from './context/useAppContext';
+import { ACTIONS } from './utils/constants';
+
 import './App.scss';
 
-function App() {
-  const [userData, setUserData] = useState({ username: '' });
-  const [sessionData, setSessionData] = useState({
-    darkMode: true,
-    isChatOpen: false,
-    messages: [],
-  });
+export function App() {
+  const { state, dispatch } = useAppContext();
+  const { isChatOpen, messages, user } = state;
 
   const onInitializeUser = (newUserData) => {
-    setUserData((prevUserData) => ({ ...prevUserData, ...newUserData }));
+    dispatch({ type: ACTIONS.UPDATE_USER, payload: newUserData });
   };
 
   const onNewMessage = (newMessage) => {
-    setSessionData((prevSessionData) => ({
-      ...prevSessionData,
-      messages: [...prevSessionData.messages, newMessage],
-    }));
+    dispatch({ type: ACTIONS.NEW_MESSAGE, payload: newMessage });
   };
 
   useEffect(() => {
@@ -37,41 +35,35 @@ function App() {
   }, []);
 
   const toggleChat = () => {
-    setSessionData((prevSessionData) => ({
-      ...prevSessionData,
-      isChatOpen: !prevSessionData.isChatOpen,
-    }));
+    dispatch({ type: ACTIONS.TOGGLE_CHAT });
   };
 
   const closeChat = () => {
-    setSessionData((prevSessionData) => ({
-      ...prevSessionData,
-      isChatOpen: false,
-    }));
+    dispatch({ type: ACTIONS.CLOSE_CHAT });
   };
 
   const addMessage = (content) => {
-    socket.emit('client:newMessage', { sender: userData.username, content });
+    socket.emit('client:newMessage', { sender: user.username, content });
   };
 
   return (
     <>
-      {userData.username?.length === 0 ? (
-        <LoginForm setUserData={setUserData} />
+      {!user.username ? (
+        <LoginForm />
       ) : (
         <Home>
           <ChatButton onClick={toggleChat} />
-          {sessionData.isChatOpen ? (
+          {isChatOpen ? (
             <ChatPortal
               closeChat={closeChat}
               addMessage={addMessage}
             >
-              {sessionData.messages.map((message) => (
+              {messages.map((message) => (
                 <Message
                   key={message.id}
                   content={message.content}
                   sender={message.sender}
-                  isSameUser={message.sender === userData.username}
+                  isSameUser={message.sender === user.username}
                 />
               ))}
             </ChatPortal>
@@ -81,5 +73,3 @@ function App() {
     </>
   );
 }
-
-export default App;
