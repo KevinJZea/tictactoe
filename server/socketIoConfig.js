@@ -1,6 +1,14 @@
-import crypto from 'crypto';
+import { createRandomId } from './helpers.js';
 
 export function socketIoConfig(socket) {
+  socket.emit('server:initializeRoom', {
+    id: createRandomId(),
+  });
+
+  socket.on('client:joinRoom', (roomId) => {
+    socket.join(roomId);
+  });
+
   socket.on('client:userConnected', (username) => {
     const userData = {
       id: socket.id.slice(0, 5),
@@ -12,7 +20,7 @@ export function socketIoConfig(socket) {
   socket.on('client:newMessage', (messageData) => {
     const newMessage = {
       ...messageData,
-      id: crypto.randomUUID(),
+      id: createRandomId(),
     };
     socket.broadcast.emit('server:newMessage', newMessage);
     socket.emit('server:newMessage', newMessage);

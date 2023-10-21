@@ -18,6 +18,11 @@ export function App() {
   const { state, dispatch } = useAppContext();
   const { draw, isChatOpen, messages, user, winner } = state;
 
+  const onInitializeRoom = (roomData) => {
+    dispatch({ type: ACTIONS.UPDATE_ROOM, payload: roomData });
+    socket.emit('client:joinRoom', roomData.id);
+  };
+
   const onInitializeUser = (newUserData) => {
     dispatch({ type: ACTIONS.UPDATE_USER, payload: newUserData });
   };
@@ -27,10 +32,12 @@ export function App() {
   };
 
   useEffect(() => {
+    socket.on('server:initializeRoom', onInitializeRoom);
     socket.on('server:initializeUser', onInitializeUser);
     socket.on('server:newMessage', onNewMessage);
 
     return () => {
+      socket.off('server:initializeRoom', onInitializeRoom);
       socket.off('server:initializeUser', onInitializeUser);
       socket.off('server:newMessage', onNewMessage);
     };

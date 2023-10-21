@@ -8,6 +8,7 @@ export const ACTIONS = {
   SWITCH_TURNS: 'switch-turns',
   TOGGLE_DARK_THEME: 'toggle-dark-theme',
   TOGGLE_CHAT: 'toggle-chat',
+  UPDATE_ROOM: 'update-room',
   UPDATE_USER: 'update-user',
   UPDATE_WINNER: 'update-winner',
 };

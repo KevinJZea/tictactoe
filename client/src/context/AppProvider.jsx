@@ -38,7 +38,7 @@ const initialState = {
   draw: false,
   isChatOpen: false,
   messages: [],
-  sessionId: '',
+  room: {},
   turn: PLAYERS.CROSS,
   user: {},
   winner: '',
@@ -90,6 +90,9 @@ const reducer = (state = initialState, action) => {
 
     case ACTIONS.TOGGLE_DARK_THEME:
       return { ...state, darkTheme: !state.darkTheme };
+
+    case ACTIONS.UPDATE_ROOM:
+      return { ...state, room: { ...state.room, ...action.payload } };
 
     case ACTIONS.UPDATE_USER:
       return { ...state, user: { ...state.user, ...action.payload } };
