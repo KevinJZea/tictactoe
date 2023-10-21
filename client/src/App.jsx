@@ -6,6 +6,7 @@ import { ChatButton } from './components/ChatButton';
 import { ChatPortal } from './components/ChatPortal';
 import { LoginForm } from './components/LoginForm';
 import { Message } from './components/Message';
+import { RoomContainer } from './components/RoomContainer';
 import { TicTacToe } from './components/TicTacToe';
 import { WinningMessage } from './components/WinningMessage';
 
@@ -61,8 +62,11 @@ export function App() {
         <LoginForm />
       ) : (
         <Home>
+          <RoomContainer />
+
           <TicTacToe />
           {winner || draw ? <WinningMessage /> : null}
+
           <ChatButton onClick={toggleChat} />
           {isChatOpen ? (
             <ChatPortal
