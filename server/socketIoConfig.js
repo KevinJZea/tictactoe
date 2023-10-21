@@ -9,6 +9,14 @@ export function socketIoConfig(socket) {
     socket.join(roomId);
   });
 
+  socket.on('client:joinAnotherRoom', ({ prevRoomId, roomId }) => {
+    socket.leave(prevRoomId);
+    socket.join(roomId);
+    socket.emit('server:initializeRoom', {
+      id: roomId,
+    });
+  });
+
   socket.on('client:userConnected', (username) => {
     const userData = {
       id: socket.id.slice(0, 5),
