@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 import { AppContext } from './appContext';
-import { ACTIONS } from '../utils/constants';
+import { ACTIONS, PLAYERS } from '../utils/constants';
 
 /**
  * Initial state for the application's state management.
@@ -30,23 +30,60 @@ import { ACTIONS } from '../utils/constants';
  */
 
 const initialState = {
+  selectedCells: {
+    [PLAYERS.CROSS]: [],
+    [PLAYERS.CIRCLE]: [],
+  },
   darkTheme: true,
+  draw: false,
   isChatOpen: false,
   messages: [],
   sessionId: '',
+  turn: PLAYERS.CROSS,
   user: {},
+  winner: '',
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ACTIONS.CELL_SELECTED:
+      return {
+        ...state,
+        selectedCells: {
+          ...state.selectedCells,
+          [action.payload.mark]: [
+            ...state.selectedCells[action.payload.mark],
+            action.payload.index,
+          ],
+        },
+      };
+
     case ACTIONS.CLOSE_CHAT:
       return { ...state, isChatOpen: false };
 
     case ACTIONS.CREATE_SESSION:
       return { ...state, sessionId: action.payload };
 
+    case ACTIONS.DRAW:
+      return { ...state, draw: true };
+
     case ACTIONS.NEW_MESSAGE:
       return { ...state, messages: [...state.messages, action.payload] };
+
+    case ACTIONS.RESTART_GAME:
+      return {
+        ...state,
+        draw: false,
+        turn: PLAYERS.CROSS,
+        selectedCells: { ...initialState.selectedCells },
+        winner: initialState.winner,
+      };
+
+    case ACTIONS.SWITCH_TURNS:
+      return {
+        ...state,
+        turn: state.turn === PLAYERS.CROSS ? PLAYERS.CIRCLE : PLAYERS.CROSS,
+      };
 
     case ACTIONS.TOGGLE_CHAT:
       return { ...state, isChatOpen: !state.isChatOpen };
@@ -56,6 +93,9 @@ const reducer = (state = initialState, action) => {
 
     case ACTIONS.UPDATE_USER:
       return { ...state, user: { ...state.user, ...action.payload } };
+
+    case ACTIONS.UPDATE_WINNER:
+      return { ...state, winner: action.payload };
 
     default:
       return state;
