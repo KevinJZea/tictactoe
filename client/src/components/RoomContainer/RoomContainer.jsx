@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppContext } from '../../context/useAppContext';
 import { socket } from '../../socket';
-import { ERRORS } from '../../utils/constants';
+import { ACTIONS, ERRORS } from '../../utils/constants';
 import './RoomContainer.scss';
 
 export function RoomContainer() {
-  const { state } = useAppContext();
+  const { state, dispatch } = useAppContext();
   const { error, room } = state;
   const [roomId, setRoomId] = useState('');
 
@@ -15,11 +15,20 @@ export function RoomContainer() {
       prevRoomId: room.id,
       roomId,
     });
-    setRoomId('');
   };
+
+  useEffect(() => {
+    if (error.type === '') setRoomId('');
+  }, [error.type]);
+
+  useEffect(() => {
+    setRoomId('');
+  }, [room]);
 
   const handleChange = (event) => {
     setRoomId(event.target.value);
+
+    if (error.type !== '') dispatch({ type: ACTIONS.CLEAN_ERROR });
   };
 
   return (
@@ -36,8 +45,11 @@ export function RoomContainer() {
         >
           <input
             className="RoomContainer--input"
+            maxLength={6}
+            minLength={6}
             name="roomId"
             placeholder="Type a room ID..."
+            required
             type="text"
             value={roomId}
             onChange={handleChange}
