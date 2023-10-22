@@ -7,6 +7,7 @@ export const ACTIONS = {
   NEW_MESSAGE: 'new-message',
   RESTART_GAME: 'restart-game',
   ROOM_FULL: 'room-full',
+  ROOM_NOT_FOUND: 'room-not-found',
   SWITCH_TURNS: 'switch-turns',
   TOGGLE_DARK_THEME: 'toggle-dark-theme',
   TOGGLE_CHAT: 'toggle-chat',
@@ -17,6 +18,7 @@ export const ACTIONS = {
 
 export const ERRORS = {
   ROOM_FULL: 'room-full',
+  ROOM_NOT_FOUND: 'room-not-found',
 };
 
 export const PLAYERS = {
