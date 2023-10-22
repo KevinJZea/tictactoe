@@ -10,8 +10,10 @@ export function socketIoConfig(socket) {
   });
 
   socket.on('client:joinAnotherRoom', ({ prevRoomId, roomId }) => {
+    const usersInRoom = socket.adapter.rooms.get(roomId)?.size;
+    if (usersInRoom === 2) return socket.emit('server:error:roomFull');
+
     socket.leave(prevRoomId);
-    socket.join(roomId);
     socket.emit('server:initializeRoom', {
       id: roomId,
     });

@@ -62,4 +62,9 @@
       background-color: hsl(0, 0%, 20%);
     }
   }
+
+  &--full-room-message {
+    font-size: 0.9rem;
+    color: hsl(0, 100%, 78%);
+  }
 }

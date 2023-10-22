@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { socket } from './socket';
 
 import { Home } from './pages/Home';
@@ -11,38 +11,56 @@ import { TicTacToe } from './components/TicTacToe';
 import { WinningMessage } from './components/WinningMessage';
 
 import { useAppContext } from './context/useAppContext';
-import { ACTIONS } from './utils/constants';
+import { ACTIONS, ERRORS } from './utils/constants';
 
 import './App.scss';
 
 export function App() {
   const { state, dispatch } = useAppContext();
-  const { draw, isChatOpen, messages, user, winner } = state;
+  const { draw, isChatOpen, error, messages, user, winner } = state;
 
-  const onInitializeRoom = (roomData) => {
-    dispatch({ type: ACTIONS.UPDATE_ROOM, payload: roomData });
-    socket.emit('client:joinRoom', roomData.id);
-  };
+  const onInitializeRoom = useCallback(
+    (roomData) => {
+      if (error.type === ERRORS.ROOM_FULL)
+        dispatch({ type: ACTIONS.CLEAN_ERROR });
 
-  const onInitializeUser = (newUserData) => {
-    dispatch({ type: ACTIONS.UPDATE_USER, payload: newUserData });
-  };
+      dispatch({ type: ACTIONS.UPDATE_ROOM, payload: roomData });
+      socket.emit('client:joinRoom', roomData.id);
+    },
+    [dispatch, error.type]
+  );
 
-  const onNewMessage = (newMessage) => {
-    dispatch({ type: ACTIONS.NEW_MESSAGE, payload: newMessage });
-  };
+  const onInitializeUser = useCallback(
+    (newUserData) => {
+      dispatch({ type: ACTIONS.UPDATE_USER, payload: newUserData });
+    },
+    [dispatch]
+  );
+
+  const onRoomFull = useCallback(() => {
+    dispatch({ type: ACTIONS.ROOM_FULL });
+  }, [dispatch]);
+
+  const onNewMessage = useCallback(
+    (newMessage) => {
+      dispatch({ type: ACTIONS.NEW_MESSAGE, payload: newMessage });
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     socket.on('server:initializeRoom', onInitializeRoom);
     socket.on('server:initializeUser', onInitializeUser);
     socket.on('server:newMessage', onNewMessage);
+    socket.on('server:error:roomFull', onRoomFull);
 
     return () => {
       socket.off('server:initializeRoom', onInitializeRoom);
       socket.off('server:initializeUser', onInitializeUser);
       socket.off('server:newMessage', onNewMessage);
+      socket.off('server:error:roomFull', onRoomFull);
     };
-  }, []);
+  }, [onInitializeRoom, onInitializeUser, onNewMessage, onRoomFull]);
 
   const toggleChat = () => {
     dispatch({ type: ACTIONS.TOGGLE_CHAT });
