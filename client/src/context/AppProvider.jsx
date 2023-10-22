@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 import { AppContext } from './appContext';
-import { ACTIONS, PLAYERS } from '../utils/constants';
+import { ACTIONS, ERRORS, PLAYERS } from '../utils/constants';
 
 /**
  * Initial state for the application's state management.
@@ -36,6 +36,7 @@ const initialState = {
   },
   darkTheme: true,
   draw: false,
+  error: {},
   isChatOpen: false,
   messages: [],
   room: {},
@@ -58,6 +59,9 @@ const reducer = (state = initialState, action) => {
         },
       };
 
+    case ACTIONS.CLEAN_ERROR:
+      return { ...state, error: { ...initialState.error } };
+
     case ACTIONS.CLOSE_CHAT:
       return { ...state, isChatOpen: false };
 
@@ -77,6 +81,12 @@ const reducer = (state = initialState, action) => {
         turn: PLAYERS.CROSS,
         selectedCells: { ...initialState.selectedCells },
         winner: initialState.winner,
+      };
+
+    case ACTIONS.ROOM_FULL:
+      return {
+        ...state,
+        error: { type: ERRORS.ROOM_FULL },
       };
 
     case ACTIONS.SWITCH_TURNS:
