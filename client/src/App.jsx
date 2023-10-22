@@ -24,43 +24,46 @@ export function App() {
       if (error.type === ERRORS.ROOM_FULL)
         dispatch({ type: ACTIONS.CLEAN_ERROR });
 
+      if (error.type === ERRORS.ROOM_NOT_FOUND)
+        dispatch({ type: ACTIONS.CLEAN_ERROR });
+
       dispatch({ type: ACTIONS.UPDATE_ROOM, payload: roomData });
       socket.emit('client:joinRoom', roomData.id);
     },
     [dispatch, error.type]
   );
 
-  const onInitializeUser = useCallback(
-    (newUserData) => {
-      dispatch({ type: ACTIONS.UPDATE_USER, payload: newUserData });
-    },
-    [dispatch]
-  );
+  const onInitializeUser = (newUserData) => {
+    dispatch({ type: ACTIONS.UPDATE_USER, payload: newUserData });
+  };
 
-  const onRoomFull = useCallback(() => {
+  const onRoomFull = () => {
     dispatch({ type: ACTIONS.ROOM_FULL });
-  }, [dispatch]);
+  };
 
-  const onNewMessage = useCallback(
-    (newMessage) => {
-      dispatch({ type: ACTIONS.NEW_MESSAGE, payload: newMessage });
-    },
-    [dispatch]
-  );
+  const onRoomNotFound = () => {
+    dispatch({ type: ACTIONS.ROOM_NOT_FOUND });
+  };
+
+  const onNewMessage = (newMessage) => {
+    dispatch({ type: ACTIONS.NEW_MESSAGE, payload: newMessage });
+  };
 
   useEffect(() => {
     socket.on('server:initializeRoom', onInitializeRoom);
     socket.on('server:initializeUser', onInitializeUser);
     socket.on('server:newMessage', onNewMessage);
     socket.on('server:error:roomFull', onRoomFull);
+    socket.on('server:error:roomNotFound', onRoomNotFound);
 
     return () => {
       socket.off('server:initializeRoom', onInitializeRoom);
       socket.off('server:initializeUser', onInitializeUser);
       socket.off('server:newMessage', onNewMessage);
       socket.off('server:error:roomFull', onRoomFull);
+      socket.off('server:error:roomNotFound', onRoomNotFound);
     };
-  }, [onInitializeRoom, onInitializeUser, onNewMessage, onRoomFull]);
+  }, [onInitializeRoom]);
 
   const toggleChat = () => {
     dispatch({ type: ACTIONS.TOGGLE_CHAT });

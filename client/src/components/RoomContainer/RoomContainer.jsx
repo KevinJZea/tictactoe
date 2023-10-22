@@ -50,8 +50,13 @@ export function RoomContainer() {
         </form>
 
         {error.type === ERRORS.ROOM_FULL ? (
-          <span className="RoomContainer--full-room-message">
+          <span className="RoomContainer--room-error-message">
             Full room. 😥 Try with a different room.
+          </span>
+        ) : null}
+        {error.type === ERRORS.ROOM_NOT_FOUND ? (
+          <span className="RoomContainer--room-error-message">
+            Room not found. 😥 Try with a different ID.
           </span>
         ) : null}
       </div>

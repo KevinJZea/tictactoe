@@ -83,6 +83,12 @@ const reducer = (state = initialState, action) => {
         winner: initialState.winner,
       };
 
+    case ACTIONS.ROOM_NOT_FOUND:
+      return {
+        ...state,
+        error: { type: ERRORS.ROOM_NOT_FOUND },
+      };
+
     case ACTIONS.ROOM_FULL:
       return {
         ...state,
