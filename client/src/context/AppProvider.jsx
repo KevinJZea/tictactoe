@@ -30,6 +30,7 @@ import { ACTIONS, ERRORS, PLAYERS } from '../utils/constants';
  */
 
 const initialState = {
+  cells: { 0: '', 1: '', 2: '', 3: '', 4: '', 5: '', 6: '', 7: '', 8: '' },
   selectedCells: {
     [PLAYERS.CROSS]: [],
     [PLAYERS.CIRCLE]: [],
@@ -55,11 +56,12 @@ const reducer = (state = initialState, action) => {
     case ACTIONS.CELL_SELECTED:
       return {
         ...state,
+        cells: { ...state.cells, [action.payload.index]: action.payload.mark },
         selectedCells: {
           ...state.selectedCells,
           [action.payload.mark]: [
             ...state.selectedCells[action.payload.mark],
-            action.payload.index,
+            parseInt(action.payload.index),
           ],
         },
       };
@@ -82,8 +84,8 @@ const reducer = (state = initialState, action) => {
     case ACTIONS.RESTART_GAME:
       return {
         ...state,
+        cells: { ...initialState.cells },
         draw: false,
-        turn: PLAYERS.CROSS,
         selectedCells: { ...initialState.selectedCells },
         winner: initialState.winner,
       };
