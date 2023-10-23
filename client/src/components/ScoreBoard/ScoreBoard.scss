@@ -1,0 +1,21 @@
+.ScoreBoard {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &--info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &--username {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  &--points {
+    font-size: 1.8rem;
+  }
+}
