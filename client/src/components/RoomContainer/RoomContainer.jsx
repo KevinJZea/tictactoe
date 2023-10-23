@@ -6,7 +6,7 @@ import './RoomContainer.scss';
 
 export function RoomContainer() {
   const { state, dispatch } = useAppContext();
-  const { error, room } = state;
+  const { error, room, user } = state;
   const [roomId, setRoomId] = useState('');
 
   const handleSubmit = (event) => {
@@ -14,6 +14,7 @@ export function RoomContainer() {
     socket.emit('client:joinAnotherRoom', {
       prevRoomId: room.id,
       roomId,
+      user
     });
   };
 
