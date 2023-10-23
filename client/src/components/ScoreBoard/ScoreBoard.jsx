@@ -12,7 +12,7 @@ export function ScoreBoard() {
         <span className="ScoreBoard--points">{user.points}</span>
       </div>
       <div className="ScoreBoard--info-container">
-        <span className="ScoreBoard--username">{rival.username || '???'}</span>
+        <span className="ScoreBoard--username">{rival.username || 'CPU'}</span>
         <span className="ScoreBoard--points">{rival.points}</span>
       </div>
     </div>

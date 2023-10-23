@@ -8,17 +8,28 @@ import { LoginForm } from './components/LoginForm';
 import { Message } from './components/Message';
 import { RoomContainer } from './components/RoomContainer';
 import { ScoreBoard } from './components/ScoreBoard';
-import { TicTacToe } from './components/TicTacToe';
+import { SinglePlayerTicTacToe, TicTacToe } from './components/TicTacToe';
 import { WinningMessage } from './components/WinningMessage';
 
 import { useAppContext } from './context/useAppContext';
 import { ACTIONS, ERRORS } from './utils/constants';
+import { checkWin } from './utils/helpers';
 
 import './App.scss';
 
 export function App() {
   const { state, dispatch } = useAppContext();
-  const { draw, isChatOpen, error, messages, user, winner } = state;
+  const {
+    draw,
+    error,
+    isChatOpen,
+    messages,
+    rival,
+    selectedCells,
+    turn,
+    user,
+    winner,
+  } = state;
 
   const onInitializeRoom = useCallback(
     (roomData) => {
@@ -62,11 +73,20 @@ export function App() {
     dispatch({ type: ACTIONS.UPDATE_RIVAL, payload: { ...host } });
   };
 
+  const onCellSelected = (selectedCellIndex, turn) => {
+    if (selectedCells[turn].includes(selectedCellIndex)) return;
+    dispatch({
+      type: ACTIONS.CELL_SELECTED,
+      payload: { mark: turn, index: selectedCellIndex },
+    });
+  };
+
   useEffect(() => {
     socket.on('server:initializeRoom', onInitializeRoom);
     socket.on('server:initializeUser', onInitializeUser);
     socket.on('server:newMessage', onNewMessage);
     socket.on('server:newRival', onNewRival);
+    socket.on('server:cellSelected', onCellSelected);
     socket.on('server:updateHostData', onUpdateHostData);
     socket.on('server:error:roomFull', onRoomFull);
     socket.on('server:error:roomNotFound', onRoomNotFound);
@@ -76,11 +96,22 @@ export function App() {
       socket.off('server:initializeUser', onInitializeUser);
       socket.off('server:newMessage', onNewMessage);
       socket.off('server:newRival', onNewRival);
+      socket.off('server:cellSelected', onCellSelected);
       socket.off('server:updateHostData', onUpdateHostData);
       socket.off('server:error:roomFull', onRoomFull);
       socket.off('server:error:roomNotFound', onRoomNotFound);
     };
   }, [onInitializeRoom, onNewRival, onUpdateHostData]);
+
+  useEffect(() => {
+    if (checkWin(selectedCells, turn)) {
+      return dispatch({ type: ACTIONS.UPDATE_WINNER, payload: turn });
+    } else if (selectedCells[turn]?.length === 5) {
+      return dispatch({ type: ACTIONS.DRAW });
+    }
+
+    dispatch({ type: ACTIONS.SWITCH_TURNS });
+  }, [selectedCells]);
 
   const toggleChat = () => {
     dispatch({ type: ACTIONS.TOGGLE_CHAT });
@@ -104,7 +135,7 @@ export function App() {
 
           <ScoreBoard />
 
-          <TicTacToe />
+          {rival.id ? <TicTacToe /> : <SinglePlayerTicTacToe />}
           {winner || draw ? <WinningMessage /> : null}
 
           <ChatButton onClick={toggleChat} />

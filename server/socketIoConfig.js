@@ -43,4 +43,8 @@ export function socketIoConfig(socket) {
   socket.on('client:rivalJoinedRoom', (host, userId) => {
     socket.to(userId).emit('server:updateHostData', { ...host });
   });
+
+  socket.on('client:cellSelected', (roomId, index, turn) => {
+    socket.to(roomId).emit('server:cellSelected', index, turn);
+  });
 }
