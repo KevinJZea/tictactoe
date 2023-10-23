@@ -7,6 +7,7 @@ import { ChatPortal } from './components/ChatPortal';
 import { LoginForm } from './components/LoginForm';
 import { Message } from './components/Message';
 import { RoomContainer } from './components/RoomContainer';
+import { ScoreBoard } from './components/ScoreBoard';
 import { TicTacToe } from './components/TicTacToe';
 import { WinningMessage } from './components/WinningMessage';
 
@@ -49,10 +50,24 @@ export function App() {
     dispatch({ type: ACTIONS.NEW_MESSAGE, payload: newMessage });
   };
 
+  const onNewRival = useCallback(
+    (rival) => {
+      socket.emit('client:rivalJoinedRoom', { ...user }, rival.id);
+      dispatch({ type: ACTIONS.UPDATE_RIVAL, payload: { ...rival } });
+    },
+    [dispatch, user]
+  );
+
+  const onUpdateHostData = (host) => {
+    dispatch({ type: ACTIONS.UPDATE_RIVAL, payload: { ...host } });
+  };
+
   useEffect(() => {
     socket.on('server:initializeRoom', onInitializeRoom);
     socket.on('server:initializeUser', onInitializeUser);
     socket.on('server:newMessage', onNewMessage);
+    socket.on('server:newRival', onNewRival);
+    socket.on('server:updateHostData', onUpdateHostData);
     socket.on('server:error:roomFull', onRoomFull);
     socket.on('server:error:roomNotFound', onRoomNotFound);
 
@@ -60,10 +75,12 @@ export function App() {
       socket.off('server:initializeRoom', onInitializeRoom);
       socket.off('server:initializeUser', onInitializeUser);
       socket.off('server:newMessage', onNewMessage);
+      socket.off('server:newRival', onNewRival);
+      socket.off('server:updateHostData', onUpdateHostData);
       socket.off('server:error:roomFull', onRoomFull);
       socket.off('server:error:roomNotFound', onRoomNotFound);
     };
-  }, [onInitializeRoom]);
+  }, [onInitializeRoom, onNewRival, onUpdateHostData]);
 
   const toggleChat = () => {
     dispatch({ type: ACTIONS.TOGGLE_CHAT });
@@ -84,6 +101,8 @@ export function App() {
       ) : (
         <Home>
           <RoomContainer />
+
+          <ScoreBoard />
 
           <TicTacToe />
           {winner || draw ? <WinningMessage /> : null}
