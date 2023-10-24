@@ -79,6 +79,18 @@ const reducer = (state = initialState, action) => {
     case ACTIONS.DRAW:
       return { ...state, draw: true };
 
+    case ACTIONS.INCREASE_USER_SCORE:
+      return {
+        ...state,
+        user: { ...state.user, points: state.user.points + 1 },
+      };
+
+    case ACTIONS.INCREASE_RIVAL_SCORE:
+      return {
+        ...state,
+        rival: { ...state.rival, points: state.rival.points + 1 },
+      };
+
     case ACTIONS.NEW_MESSAGE:
       return { ...state, messages: [...state.messages, action.payload] };
 

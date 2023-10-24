@@ -8,7 +8,7 @@ import { LoginForm } from './components/LoginForm';
 import { Message } from './components/Message';
 import { RoomContainer } from './components/RoomContainer';
 import { ScoreBoard } from './components/ScoreBoard';
-import { SinglePlayerTicTacToe, TicTacToe } from './components/TicTacToe';
+import { TicTacToe } from './components/TicTacToe';
 import { WinningMessage } from './components/WinningMessage';
 
 import { useAppContext } from './context/useAppContext';
@@ -106,8 +106,19 @@ export function App() {
 
   useEffect(() => {
     if (checkWin(selectedCells, turn)) {
-      const winnerName = user.mark === turn ? user.username : rival.username;
-      return dispatch({ type: ACTIONS.UPDATE_WINNER, payload: winnerName });
+      const isUserWinner = user.mark === turn;
+
+      if (isUserWinner) {
+        dispatch({ type: ACTIONS.INCREASE_USER_SCORE });
+      } else {
+        dispatch({ type: ACTIONS.INCREASE_RIVAL_SCORE });
+      }
+
+      const winnerUsername = isUserWinner ? user.username : rival.username;
+      return dispatch({
+        type: ACTIONS.UPDATE_WINNER,
+        payload: winnerUsername,
+      });
     } else if (selectedCells[turn]?.length === 5) {
       return dispatch({ type: ACTIONS.DRAW });
     }
@@ -135,9 +146,9 @@ export function App() {
         <Home>
           <RoomContainer />
 
-          <ScoreBoard />
+          {rival.id ? <ScoreBoard /> : null}
 
-          {rival.id ? <TicTacToe /> : <SinglePlayerTicTacToe />}
+          {rival.id ? <TicTacToe /> : null}
           {winner || draw ? <WinningMessage /> : null}
 
           <ChatButton onClick={toggleChat} />

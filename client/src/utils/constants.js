@@ -4,6 +4,8 @@ export const ACTIONS = {
   CLOSE_CHAT: 'close-chat',
   CREATE_SESSION: 'create-session',
   DRAW: 'draw',
+  INCREASE_USER_SCORE: 'increase-user-score',
+  INCREASE_RIVAL_SCORE: 'increase-rival-score',
   NEW_MESSAGE: 'new-message',
   RESTART_GAME: 'restart-game',
   ROOM_FULL: 'room-full',
