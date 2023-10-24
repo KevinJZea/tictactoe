@@ -114,12 +114,15 @@ export function App() {
         dispatch({ type: ACTIONS.INCREASE_RIVAL_SCORE });
       }
 
+      dispatch({ type: ACTIONS.CLEAN_GAME });
+
       const winnerUsername = isUserWinner ? user.username : rival.username;
       return dispatch({
         type: ACTIONS.UPDATE_WINNER,
         payload: winnerUsername,
       });
     } else if (selectedCells[turn]?.length === 5) {
+      dispatch({ type: ACTIONS.CLEAN_GAME });
       return dispatch({ type: ACTIONS.DRAW });
     }
 
