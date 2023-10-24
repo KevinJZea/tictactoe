@@ -1,6 +1,8 @@
 export const ACTIONS = {
   CELL_SELECTED: 'cell-selected',
+  CLEAN_DRAW: 'clean-draw',
   CLEAN_ERROR: 'clean-error',
+  CLEAN_GAME: 'clean-game',
   CLOSE_CHAT: 'close-chat',
   CREATE_SESSION: 'create-session',
   DRAW: 'draw',
