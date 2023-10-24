@@ -1,5 +1,5 @@
 import { useAppContext } from '../../context/useAppContext';
-import { ACTIONS, PLAYERS } from '../../utils/constants';
+import { ACTIONS } from '../../utils/constants';
 import './WinningMessage.scss';
 
 export function WinningMessage() {
@@ -18,7 +18,7 @@ export function WinningMessage() {
           </>
         ) : (
           <>
-            {state.winner === PLAYERS.CROSS ? 'Cross' : 'Circle'} Wins!
+            {state.winner} Wins!
             <br />
             🥳🥳🥳
           </>
