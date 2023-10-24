@@ -106,7 +106,8 @@ export function App() {
 
   useEffect(() => {
     if (checkWin(selectedCells, turn)) {
-      return dispatch({ type: ACTIONS.UPDATE_WINNER, payload: turn });
+      const winnerName = user.mark === turn ? user.username : rival.username;
+      return dispatch({ type: ACTIONS.UPDATE_WINNER, payload: winnerName });
     } else if (selectedCells[turn]?.length === 5) {
       return dispatch({ type: ACTIONS.DRAW });
     }
