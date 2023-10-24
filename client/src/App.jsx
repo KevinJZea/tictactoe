@@ -1,14 +1,20 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, lazy, Suspense } from 'react';
 import { socket } from './socket';
-
-import { Home } from './pages/Home';
-import { LoginForm } from './components/LoginForm';
 
 import { useAppContext } from './context/useAppContext';
 import { ACTIONS, ERRORS } from './utils/constants';
 import { checkWin } from './utils/helpers';
 
 import './App.scss';
+
+const Home = lazy(() =>
+  import('./pages/Home').then((module) => ({ default: module.Home }))
+);
+const LoginForm = lazy(() =>
+  import('./components/LoginForm').then((module) => ({
+    default: module.LoginForm,
+  }))
+);
 
 export function App() {
   const { state, dispatch } = useAppContext();
@@ -112,5 +118,9 @@ export function App() {
     dispatch({ type: ACTIONS.SWITCH_TURNS });
   }, [selectedCells]);
 
-  return <>{!user.username ? <LoginForm /> : <Home />}</>;
+  return (
+    <Suspense fallback={<h2>Loading...</h2>}>
+      {!user.username ? <LoginForm /> : <Home />}
+    </Suspense>
+  );
 }
