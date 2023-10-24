@@ -2,14 +2,7 @@ import { useEffect, useCallback } from 'react';
 import { socket } from './socket';
 
 import { Home } from './pages/Home';
-import { ChatButton } from './components/ChatButton';
-import { ChatPortal } from './components/ChatPortal';
 import { LoginForm } from './components/LoginForm';
-import { Message } from './components/Message';
-import { RoomContainer } from './components/RoomContainer';
-import { ScoreBoard } from './components/ScoreBoard';
-import { TicTacToe } from './components/TicTacToe';
-import { WinningMessage } from './components/WinningMessage';
 
 import { useAppContext } from './context/useAppContext';
 import { ACTIONS, ERRORS } from './utils/constants';
@@ -19,17 +12,7 @@ import './App.scss';
 
 export function App() {
   const { state, dispatch } = useAppContext();
-  const {
-    draw,
-    error,
-    isChatOpen,
-    messages,
-    rival,
-    selectedCells,
-    turn,
-    user,
-    winner,
-  } = state;
+  const { error, rival, selectedCells, turn, user } = state;
 
   const onInitializeRoom = useCallback(
     (roomData) => {
@@ -129,49 +112,5 @@ export function App() {
     dispatch({ type: ACTIONS.SWITCH_TURNS });
   }, [selectedCells]);
 
-  const toggleChat = () => {
-    dispatch({ type: ACTIONS.TOGGLE_CHAT });
-  };
-
-  const closeChat = () => {
-    dispatch({ type: ACTIONS.CLOSE_CHAT });
-  };
-
-  const addMessage = (content) => {
-    socket.emit('client:newMessage', { sender: user.username, content });
-  };
-
-  return (
-    <>
-      {!user.username ? (
-        <LoginForm />
-      ) : (
-        <Home>
-          <RoomContainer />
-
-          {rival.id ? <ScoreBoard /> : null}
-
-          {rival.id ? <TicTacToe /> : null}
-          {winner || draw ? <WinningMessage /> : null}
-
-          <ChatButton onClick={toggleChat} />
-          {isChatOpen ? (
-            <ChatPortal
-              closeChat={closeChat}
-              addMessage={addMessage}
-            >
-              {messages.map((message) => (
-                <Message
-                  key={message.id}
-                  content={message.content}
-                  sender={message.sender}
-                  isSameUser={message.sender === user.username}
-                />
-              ))}
-            </ChatPortal>
-          ) : null}
-        </Home>
-      )}
-    </>
-  );
+  return <>{!user.username ? <LoginForm /> : <Home />}</>;
 }
