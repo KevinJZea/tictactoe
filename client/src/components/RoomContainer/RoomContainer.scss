@@ -1,0 +1,70 @@
+.RoomContainer {
+  position: fixed;
+  top: 1rem;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  &--info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &--room-text {
+    font-weight: 500;
+  }
+
+  &--room-id {
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+  }
+
+  &--form {
+    display: flex;
+    gap: 12px;
+    width: min-content;
+    height: min-content;
+  }
+
+  &--input {
+    padding: 0 16px;
+    color: hsl(0, 0%, 100%);
+    font-size: 0.9rem;
+    background-color: hsl(0, 0%, 40%);
+    border: none;
+    border-radius: 8px;
+    width: 160px;
+
+    &:hover {
+      background-color: hsl(0, 0%, 45%);
+    }
+
+    &::placeholder {
+      color: hsla(0, 0%, 70%, 0.6);
+    }
+  }
+
+  &--submit {
+    cursor: pointer;
+    border: none;
+    font-size: 0.9rem;
+    padding: 10px 16px;
+    background-color: hsl(0, 0%, 25%);
+    border-radius: 12px;
+    color: hsl(0, 0%, 100%);
+
+    &:hover {
+      background-color: hsl(0, 0%, 20%);
+    }
+  }
+
+  &--room-error-message {
+    font-size: 0.9rem;
+    color: hsl(0, 100%, 78%);
+  }
+}

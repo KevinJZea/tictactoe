@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 import { AppContext } from './appContext';
-import { ACTIONS, PLAYERS } from '../utils/constants';
+import { ACTIONS, ERRORS, PLAYERS } from '../utils/constants';
 
 /**
  * Initial state for the application's state management.
@@ -30,17 +30,25 @@ import { ACTIONS, PLAYERS } from '../utils/constants';
  */
 
 const initialState = {
+  cells: { 0: '', 1: '', 2: '', 3: '', 4: '', 5: '', 6: '', 7: '', 8: '' },
   selectedCells: {
     [PLAYERS.CROSS]: [],
     [PLAYERS.CIRCLE]: [],
   },
   darkTheme: true,
   draw: false,
+  error: {},
   isChatOpen: false,
   messages: [],
-  sessionId: '',
+  rival: {
+    points: 0,
+  },
+  room: {},
   turn: PLAYERS.CROSS,
-  user: {},
+  user: {
+    mark: PLAYERS.CROSS,
+    points: 0,
+  },
   winner: '',
 };
 
@@ -49,14 +57,18 @@ const reducer = (state = initialState, action) => {
     case ACTIONS.CELL_SELECTED:
       return {
         ...state,
+        cells: { ...state.cells, [action.payload.index]: action.payload.mark },
         selectedCells: {
           ...state.selectedCells,
           [action.payload.mark]: [
             ...state.selectedCells[action.payload.mark],
-            action.payload.index,
+            parseInt(action.payload.index),
           ],
         },
       };
+
+    case ACTIONS.CLEAN_ERROR:
+      return { ...state, error: { ...initialState.error } };
 
     case ACTIONS.CLOSE_CHAT:
       return { ...state, isChatOpen: false };
@@ -67,16 +79,40 @@ const reducer = (state = initialState, action) => {
     case ACTIONS.DRAW:
       return { ...state, draw: true };
 
+    case ACTIONS.INCREASE_USER_SCORE:
+      return {
+        ...state,
+        user: { ...state.user, points: state.user.points + 1 },
+      };
+
+    case ACTIONS.INCREASE_RIVAL_SCORE:
+      return {
+        ...state,
+        rival: { ...state.rival, points: state.rival.points + 1 },
+      };
+
     case ACTIONS.NEW_MESSAGE:
       return { ...state, messages: [...state.messages, action.payload] };
 
     case ACTIONS.RESTART_GAME:
       return {
         ...state,
+        cells: { ...initialState.cells },
         draw: false,
-        turn: PLAYERS.CROSS,
         selectedCells: { ...initialState.selectedCells },
         winner: initialState.winner,
+      };
+
+    case ACTIONS.ROOM_NOT_FOUND:
+      return {
+        ...state,
+        error: { type: ERRORS.ROOM_NOT_FOUND },
+      };
+
+    case ACTIONS.ROOM_FULL:
+      return {
+        ...state,
+        error: { type: ERRORS.ROOM_FULL },
       };
 
     case ACTIONS.SWITCH_TURNS:
@@ -90,6 +126,12 @@ const reducer = (state = initialState, action) => {
 
     case ACTIONS.TOGGLE_DARK_THEME:
       return { ...state, darkTheme: !state.darkTheme };
+
+    case ACTIONS.UPDATE_RIVAL:
+      return { ...state, rival: { ...state.rival, ...action.payload } };
+
+    case ACTIONS.UPDATE_ROOM:
+      return { ...state, room: { ...state.room, ...action.payload } };
 
     case ACTIONS.UPDATE_USER:
       return { ...state, user: { ...state.user, ...action.payload } };

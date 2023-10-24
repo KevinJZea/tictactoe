@@ -1,0 +1,35 @@
+.ScoreBoard {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &--main-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    user-select: none;
+  }
+
+  &--info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &--username {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  &--points {
+    font-size: 1.8rem;
+  }
+
+  &--turn-text {
+    font-size: 2.2rem;
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+}
