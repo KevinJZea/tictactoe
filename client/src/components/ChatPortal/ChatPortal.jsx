@@ -1,8 +1,23 @@
 import { useState } from 'react';
+import { Message } from '../Message';
+import { socket } from '../../socket';
+import { useAppContext } from '../../context/useAppContext';
+import { ACTIONS } from '../../utils/constants';
 import './ChatPortal.scss';
 
-export function ChatPortal({ children, closeChat, addMessage }) {
+export function ChatPortal() {
+  const { state, dispatch } = useAppContext();
+  const { messages, user } = state;
+
   const [messageContent, setMessageContent] = useState('');
+
+  const closeChat = () => {
+    dispatch({ type: ACTIONS.CLOSE_CHAT });
+  };
+
+  const addMessage = (content) => {
+    socket.emit('client:newMessage', { sender: user.username, content });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -24,7 +39,16 @@ export function ChatPortal({ children, closeChat, addMessage }) {
         X
       </button>
 
-      <div className="ChatPortal--messages-container">{children}</div>
+      <div className="ChatPortal--messages-container">
+        {messages.map((message) => (
+          <Message
+            key={message.id}
+            content={message.content}
+            sender={message.sender}
+            isSameUser={message.sender === user.username}
+          />
+        ))}
+      </div>
 
       <form
         className="ChatPortal--form-container"
