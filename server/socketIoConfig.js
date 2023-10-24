@@ -20,7 +20,7 @@ export function socketIoConfig(socket) {
     socket.emit('server:initializeRoom', {
       id: roomId,
     });
-    socket.to(roomId).emit('server:newRival', { ...user });
+    socket.to(roomId).emit('server:newRival', { ...user, mark: 'circle' });
   });
 
   socket.on('client:userConnected', (username) => {
@@ -40,8 +40,10 @@ export function socketIoConfig(socket) {
     socket.emit('server:newMessage', newMessage);
   });
 
-  socket.on('client:rivalJoinedRoom', (host, userId) => {
-    socket.to(userId).emit('server:updateHostData', { ...host });
+  socket.on('client:rivalJoinedRoom', (host, rival) => {
+    socket
+      .to(rival.id)
+      .emit('server:updateHostData', { ...host }, { ...rival });
   });
 
   socket.on('client:cellSelected', (roomId, index, turn) => {

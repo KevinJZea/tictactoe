@@ -46,6 +46,7 @@ const initialState = {
   room: {},
   turn: PLAYERS.CROSS,
   user: {
+    mark: PLAYERS.CROSS,
     points: 0,
   },
   winner: '',

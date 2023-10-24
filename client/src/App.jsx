@@ -63,14 +63,15 @@ export function App() {
 
   const onNewRival = useCallback(
     (rival) => {
-      socket.emit('client:rivalJoinedRoom', { ...user }, rival.id);
+      socket.emit('client:rivalJoinedRoom', { ...user }, { ...rival });
       dispatch({ type: ACTIONS.UPDATE_RIVAL, payload: { ...rival } });
     },
     [dispatch, user]
   );
 
-  const onUpdateHostData = (host) => {
+  const onUpdateHostData = (host, rival) => {
     dispatch({ type: ACTIONS.UPDATE_RIVAL, payload: { ...host } });
+    dispatch({ type: ACTIONS.UPDATE_USER, payload: { ...rival } });
   };
 
   const onCellSelected = (selectedCellIndex, turn) => {
