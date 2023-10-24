@@ -67,8 +67,19 @@ const reducer = (state = initialState, action) => {
         },
       };
 
+    case ACTIONS.CLEAN_DRAW:
+      return { ...state, draw: false };
+
     case ACTIONS.CLEAN_ERROR:
       return { ...state, error: { ...initialState.error } };
+
+    case ACTIONS.CLEAN_GAME:
+      return {
+        ...state,
+        cells: { ...initialState.cells },
+        draw: false,
+        selectedCells: { ...initialState.selectedCells },
+      };
 
     case ACTIONS.CLOSE_CHAT:
       return { ...state, isChatOpen: false };
@@ -97,9 +108,6 @@ const reducer = (state = initialState, action) => {
     case ACTIONS.RESTART_GAME:
       return {
         ...state,
-        cells: { ...initialState.cells },
-        draw: false,
-        selectedCells: { ...initialState.selectedCells },
         winner: initialState.winner,
       };
 

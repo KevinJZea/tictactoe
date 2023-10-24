@@ -4,21 +4,23 @@ import './WinningMessage.scss';
 
 export function WinningMessage() {
   const { state, dispatch } = useAppContext();
+  const { draw, winner } = state;
 
   const handleClick = () => {
+    if (draw) return dispatch({ type: ACTIONS.CLEAN_DRAW });
     dispatch({ type: ACTIONS.RESTART_GAME });
   };
 
   return (
     <div className="WinningMessage">
       <p className="WinningMessage--message">
-        {state.draw ? (
+        {draw ? (
           <>
             Draw! <br /> Wanna try again?
           </>
         ) : (
           <>
-            {state.winner} Wins!
+            {winner} Wins!
             <br />
             🥳🥳🥳
           </>
