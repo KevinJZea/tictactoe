@@ -1,9 +1,12 @@
-import { useState } from 'react';
-import { Message } from '../Message';
+import { Suspense, lazy, useState } from 'react';
 import { socket } from '../../socket';
 import { useAppContext } from '../../context/useAppContext';
 import { ACTIONS } from '../../utils/constants';
 import './ChatPortal.scss';
+
+const Message = lazy(() =>
+  import('../Message').then((module) => ({ default: module.Message }))
+);
 
 export function ChatPortal() {
   const { state, dispatch } = useAppContext();
@@ -40,14 +43,16 @@ export function ChatPortal() {
       </button>
 
       <div className="ChatPortal--messages-container">
-        {messages.map((message) => (
-          <Message
-            key={message.id}
-            content={message.content}
-            sender={message.sender}
-            isSameUser={message.sender === user.username}
-          />
-        ))}
+        <Suspense>
+          {messages.map((message) => (
+            <Message
+              key={message.id}
+              content={message.content}
+              sender={message.sender}
+              isSameUser={message.sender === user.username}
+            />
+          ))}
+        </Suspense>
       </div>
 
       <form
