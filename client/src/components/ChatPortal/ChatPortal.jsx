@@ -1,7 +1,8 @@
 import { Suspense, lazy, useState } from 'react';
 import { socket } from '../../socket';
+import { Icon } from '../Icon';
 import { useAppContext } from '../../context/useAppContext';
-import { ACTIONS } from '../../utils/constants';
+import { ACTIONS, ICONS } from '../../utils/constants';
 import './ChatPortal.scss';
 
 const Message = lazy(() =>
@@ -39,7 +40,7 @@ export function ChatPortal() {
         type="button"
         onClick={closeChat}
       >
-        X
+        <Icon name={ICONS.X} />
       </button>
 
       <div className="ChatPortal--messages-container">
