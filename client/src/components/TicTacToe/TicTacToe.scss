@@ -1,9 +1,7 @@
-$cell-size: 80px;
-$mark-size: $cell-size * 0.9;
+@import '../../sass';
 
 .TicTacToe {
   &--board {
-    background-color: hsl(0, 00%, 25%);
     display: grid;
     justify-content: center;
     align-content: center;
@@ -11,15 +9,16 @@ $mark-size: $cell-size * 0.9;
     align-items: center;
     grid-template-columns: repeat(3, auto);
     user-select: none;
+    background-color: var(--board-bg);
 
     &.cross .TicTacToe--cell:not(.cross):not(.circle):hover {
       &::before,
       &::after {
         content: '';
         position: absolute;
-        width: $mark-size * 0.15;
-        height: $mark-size;
-        background-color: hsl(0, 00%, 35%);
+        width: calc(var(--mark-size) * 0.15);
+        height: var(--mark-size);
+        background-color: var(--mark-shadow-color);
       }
 
       &::before {
@@ -39,14 +38,14 @@ $mark-size: $cell-size * 0.9;
       }
 
       &::before {
-        width: $mark-size;
-        height: $mark-size;
-        background-color: hsl(0, 00%, 35%);
+        width: var(--mark-size);
+        height: var(--mark-size);
+        background-color: var(--mark-shadow-color);
       }
       &::after {
-        width: $mark-size * 0.7;
-        height: $mark-size * 0.7;
-        background-color: hsl(0, 00%, 25%);
+        width: calc(var(--mark-size) * 0.7);
+        height: calc(var(--mark-size) * 0.7);
+        background-color: var(--board-bg);
       }
     }
   }
@@ -54,9 +53,9 @@ $mark-size: $cell-size * 0.9;
   &--cell {
     cursor: pointer;
     position: relative;
-    width: $cell-size;
-    height: $cell-size;
-    border: 1px solid hsl(0, 00%, 45%);
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 1px solid var(--board-border);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,9 +90,9 @@ $mark-size: $cell-size * 0.9;
       &::after {
         content: '';
         position: absolute;
-        width: $mark-size * 0.15;
-        height: $mark-size;
-        background-color: hsl(0, 00%, 90%);
+        width: calc(var(--mark-size) * 0.15);
+        height: var(--mark-size);
+        background-color: var(--text-color);
       }
 
       &::before {
@@ -113,14 +112,14 @@ $mark-size: $cell-size * 0.9;
       }
 
       &::before {
-        width: $mark-size;
-        height: $mark-size;
-        background-color: hsl(0, 00%, 90%);
+        width: var(--mark-size);
+        height: var(--mark-size);
+        background-color: var(--text-color);
       }
       &::after {
-        width: $mark-size * 0.7;
-        height: $mark-size * 0.7;
-        background-color: hsl(0, 00%, 25%);
+        width: calc(var(--mark-size) * 0.7);
+        height: calc(var(--mark-size) * 0.7);
+        background-color: var(--board-bg);
       }
     }
   }

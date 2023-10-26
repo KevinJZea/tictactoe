@@ -3,17 +3,17 @@
   bottom: 6vh;
   right: 6vw;
   border-radius: 50%;
-  color: hsl(200, 80%, 90%);
   font-size: 1.5em;
-  background-color: hsl(200, 80%, 50%);
   height: 60px;
   width: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   user-select: none;
-
+  color: var(--text-color);
+  background-color: var(--chat-button-bg);
+  
   &:hover {
-    background-color: hsl(200, 80%, 60%);
+    background-color: var(--chat-button-hover-bg);
   }
 }

@@ -1,7 +1,7 @@
 .WinningMessage {
   position: fixed;
   inset: 0;
-  background-color: hsla(0, 0%, 0%, 0.8);
+  background-color: var(--winning-message-bg);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,10 +16,12 @@
 
   &--button {
     font-size: 1.6rem;
-    background-color: hsl(0, 00%, 80%);
-
+    color: var(--winning-button-text);
+    background-color: var(--winning-button-bg);
+    
     &:hover {
-      background-color: hsl(0, 00%, 60%);
+      
+      background-color: var(--winning-button-hover-bg);
     }
   }
 }

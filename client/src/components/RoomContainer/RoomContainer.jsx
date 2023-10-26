@@ -14,7 +14,7 @@ export function RoomContainer() {
     socket.emit('client:joinAnotherRoom', {
       prevRoomId: room.id,
       roomId,
-      user
+      user,
     });
   };
 
@@ -39,7 +39,7 @@ export function RoomContainer() {
         <span className="RoomContainer--room-id">{room.id}</span>
       </p>
 
-      <div>
+      <div className="RoomContainer--form-container">
         <form
           className="RoomContainer--form"
           onSubmit={handleSubmit}
@@ -64,12 +64,12 @@ export function RoomContainer() {
 
         {error.type === ERRORS.ROOM_FULL ? (
           <span className="RoomContainer--room-error-message">
-            Full room. 😥 Try with a different room.
+            Full room. 😥 <br /> Try with a different room.
           </span>
         ) : null}
         {error.type === ERRORS.ROOM_NOT_FOUND ? (
           <span className="RoomContainer--room-error-message">
-            Room not found. 😥 Try with a different ID.
+            Room not found. 😥 <br /> Try with a different ID.
           </span>
         ) : null}
       </div>

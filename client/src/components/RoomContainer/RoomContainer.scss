@@ -1,3 +1,5 @@
+@import '../../sass';
+
 .RoomContainer {
   position: fixed;
   top: 1rem;
@@ -6,8 +8,11 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  column-gap: 8px;
+  padding: 0 16px;
 
   &--info {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -25,27 +30,43 @@
   }
 
   &--form {
+    width: 100%;
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 12px;
-    width: min-content;
     height: min-content;
+
+    &-container {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   &--input {
-    padding: 0 16px;
-    color: hsl(0, 0%, 100%);
+    padding: 10px 16px;
     font-size: 0.9rem;
-    background-color: hsl(0, 0%, 40%);
     border: none;
     border-radius: 8px;
     width: 160px;
+    color: var(--color-text);
+    background-color: var(--input-bg);
+
+    @include only-small {
+      font-size: 0.8rem;
+      padding: 6px 12px;
+      width: 120px;
+    }
 
     &:hover {
-      background-color: hsl(0, 0%, 45%);
+      background-color: var(--input-hover-bg);
     }
 
     &::placeholder {
-      color: hsla(0, 0%, 70%, 0.6);
+      color: var(--input-placeholder);
     }
   }
 
@@ -54,17 +75,33 @@
     border: none;
     font-size: 0.9rem;
     padding: 10px 16px;
-    background-color: hsl(0, 0%, 25%);
+    background-color: var(--outer-button-bg);
     border-radius: 12px;
-    color: hsl(0, 0%, 100%);
+    color: var(--color-text);
+
+    @include only-small {
+      font-size: 0.8rem;
+      padding: 8px 12px;
+    }
 
     &:hover {
-      background-color: hsl(0, 0%, 20%);
+      background-color: var(--outer-button-hover-bg);
     }
   }
 
   &--room-error-message {
     font-size: 0.9rem;
-    color: hsl(0, 100%, 78%);
+    color: var(--error-color);
+
+    br {
+      display: none;
+    }
+
+    @include only-small {
+      font-size: 0.75rem;
+      br {
+        display: block;
+      }
+    }
   }
 }
