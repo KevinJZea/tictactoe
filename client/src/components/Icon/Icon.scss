@@ -1,0 +1,12 @@
+@import '../../sass';
+
+.Icon,
+.icon {
+  width: 32px;
+  height: 32px;
+
+  @include only-small {
+    width: 28px;
+    height: 28px;
+  }
+}
