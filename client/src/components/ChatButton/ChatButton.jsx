@@ -1,5 +1,6 @@
+import { Icon } from '../Icon';
 import { useAppContext } from '../../context/useAppContext';
-import { ACTIONS } from '../../utils/constants';
+import { ACTIONS, ICONS } from '../../utils/constants';
 import './ChatButton.scss';
 
 export function ChatButton() {
@@ -15,7 +16,7 @@ export function ChatButton() {
       type="button"
       onClick={toggleChat}
     >
-      C
+      <Icon name={ICONS.MessageCircle} />
     </button>
   );
 }
