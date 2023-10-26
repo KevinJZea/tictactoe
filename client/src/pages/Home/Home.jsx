@@ -1,15 +1,10 @@
 import { Suspense, lazy } from 'react';
 import { ChatButton } from '../../components/ChatButton';
+import { ChatPortal } from '../../components/ChatPortal';
 import { RoomContainer } from '../../components/RoomContainer';
 
 import { useAppContext } from '../../context/useAppContext';
 import './Home.scss';
-
-const ChatPortal = lazy(() =>
-  import('../../components/ChatPortal').then((module) => ({
-    default: module.ChatPortal,
-  }))
-);
 
 const ScoreBoard = lazy(() =>
   import('../../components/ScoreBoard').then((module) => ({
@@ -31,7 +26,7 @@ const WinningMessage = lazy(() =>
 
 export function Home() {
   const { state } = useAppContext();
-  const { draw, isChatOpen, rival, winner } = state;
+  const { draw, rival, winner } = state;
 
   return (
     <main className="Home--main-container">
@@ -44,9 +39,7 @@ export function Home() {
         {winner || draw ? <WinningMessage /> : null}
       </Suspense>
 
-      <Suspense>
-        {isChatOpen ? <ChatPortal /> : null}
-      </Suspense>
+      <ChatPortal />
 
       <ChatButton />
     </main>

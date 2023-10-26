@@ -1,12 +1,17 @@
+@import '../../sass/';
+
 .Home {
   &--main-container {
     position: relative;
     height: 90vh;
-    width: 100%;
     display: flex;
-    gap: 100px;
+    gap: 60px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    @include tablet {
+      gap: 80px;
+    }
   }
 }
