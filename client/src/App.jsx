@@ -5,8 +5,6 @@ import { useAppContext } from './context/useAppContext';
 import { ACTIONS, ERRORS } from './utils/constants';
 import { checkWin } from './utils/helpers';
 
-import './App.scss';
-
 const Home = lazy(() =>
   import('./pages/Home').then((module) => ({ default: module.Home }))
 );

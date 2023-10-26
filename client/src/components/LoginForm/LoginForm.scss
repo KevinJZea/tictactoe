@@ -1,44 +1,68 @@
+@import '../../sass';
+
 .LoginForm {
-  padding: 36px 42px;
-  background-color: hsl(0, 0%, 25%);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
+  padding: 36px 42px;
   gap: 32px;
+  width: auto;
+  max-width: 360px;
+  background-color: var(--container-bg);
+
+  @include only-small {
+    width: 80%;
+    padding: 20px 24px;
+    gap: 20px;
+    max-width: 260px;
+  }
 
   &--title {
-    color: hsl(0, 0%, 100%);
     font-size: 1.6rem;
+
+    @include only-small {
+      font-size: 1.2rem;
+    }
   }
 
   &--input {
     padding: 8px 16px;
-    color: hsl(0, 0%, 100%);
+    color: var(--input-color);
     font-size: 1.2rem;
-    background-color: hsl(0, 0%, 40%);
-    border: none;
+    background-color: var(--input-bg);
     border-radius: 8px;
+    border: none;
+
+    @include only-small {
+      font-size: 1rem;
+    }
 
     &:hover {
-      background-color: hsl(0, 0%, 45%);
+      background-color: var(--input-hover-bg);
     }
 
     &::placeholder {
-      color: hsla(0, 0%, 70%, 0.6);
+      color: var(--input-placeholder);
     }
   }
 
   &--button {
     cursor: pointer;
-    border: 1px solid hsl(0, 0%, 15%);
-    font-size: 1.5rem;
-    padding: 16px 36px;
-    background-color: hsl(0, 0%, 15%);
+    border: none;
+    padding: 8px 0;
+    background-color: var(--button-bg);
     border-radius: 12px;
-    color: hsl(0, 0%, 100%);
+    color: var(--text-color);
+    padding: 16px 0px;
+    font-size: 1.5rem;
+
+    @include only-small {
+      padding: 8px 12px;
+      font-size: 1.2rem;
+    }
 
     &:hover {
-      background-color: hsl(0, 0%, 20%);
+      background-color: var(--button-hover-bg);
     }
   }
 }

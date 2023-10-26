@@ -1,3 +1,5 @@
+@import '../../sass';
+
 .Message {
   display: flex;
   justify-content: flex-start;
@@ -8,11 +10,10 @@
 
   &--text-content {
     padding: 12px 20px;
-    min-width: 100px;
     width: fit-content;
     max-width: 90%;
-    background-color: hsl(260, 80%, 30%);
-    color: hsl(0, 0%, 80%);
+    background-color: var(--message-bg);
+    color: var(--text-color);
     font-size: 1rem;
     border-radius: 8px;
     margin: 0;
@@ -20,8 +21,13 @@
     text-overflow: ellipsis;
     word-wrap: break-word;
     
+    @include only-small {
+      padding: 8px 14px;
+      font-size: 0.9rem;
+    }
+    
     &.same-user {
-      background-color: hsl(200, 80%, 30%);
+      background-color: var(--user-message-bg);
       text-align: end;
     }
   }

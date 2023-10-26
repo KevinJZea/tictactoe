@@ -1,15 +1,26 @@
+@import '../../sass';
+
 .ScoreBoard {
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  column-gap: 40px;
+
+  @include tablet {
+    column-gap: 60px;
+  }
 
   &--main-container {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 60px;
+    gap: 40px;
     user-select: none;
+
+    @include tablet {
+      gap: 60px;
+    }
   }
 
   &--info-container {
@@ -19,8 +30,12 @@
   }
 
   &--username {
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 500;
+
+    @include tablet {
+      font-size: 2rem;
+    }
   }
 
   &--points {
@@ -28,8 +43,12 @@
   }
 
   &--turn-text {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     margin: 0;
     letter-spacing: 0.5px;
+
+    @include tablet {
+      font-size: 2.2rem;
+    }
   }
 }

@@ -10,7 +10,7 @@ const Message = lazy(() =>
 
 export function ChatPortal() {
   const { state, dispatch } = useAppContext();
-  const { messages, user } = state;
+  const { isChatOpen, messages, user } = state;
 
   const [messageContent, setMessageContent] = useState('');
 
@@ -33,7 +33,7 @@ export function ChatPortal() {
   };
 
   return (
-    <div className="ChatPortal">
+    <div className={`${isChatOpen ? 'ChatPortal' : 'hide'}`}>
       <button
         className="ChatPortal--exit-button"
         type="button"
