@@ -30,22 +30,53 @@ a {
 }
 
 body {
+  --body-bg: hsl(240, 10%, 90%);
+  --container-bg: hsl(0, 0%, 100%);
+  --subcontainer-bg: hsl(0, 0%, 92%);
+  --box-shadow: hsl(0, 0%, 70%);
+  --button-bg: hsl(0, 0%, 90%);
+  --button-hover-bg: hsl(0, 0%, 85%);
+  --outer-button-bg: hsl(0, 0%, 75%);
+  --outer-button-hover-bg: hsl(0, 0%, 80%);
+  --input-bg: hsl(0, 0%, 80%);
+  --input-hover-bg: hsl(0, 0%, 75%);
+  --input-color: hsl(0, 0%, 10%);
+  --input-placeholder: hsl(0, 0%, 60%);
+  --text-color: hsl(0, 0%, 5%);
+  --error-color: hsl(0, 100%, 22%);
+  --chat-button-bg: hsl(200, 70%, 55%);
+  --chat-button-hover-bg: hsl(200, 70%, 45%);
+  --message-bg: hsl(260, 70%, 73%);
+  --user-message-bg: hsl(200, 80%, 65%);
+  --winning-message-bg: hsla(0, 0%, 100%, 0.8);
+  --winning-button-text: hsl(0, 0%, 100%);
+  --winning-button-bg: hsl(0, 0%, 20%);
+  --winning-button-hover-bg: hsl(0, 0%, 30%);
+  --board-bg: hsl(0, 0%, 75%);
+  --board-border: hsl(0, 0%, 55%);
+  --mark-shadow-color: hsl(0, 0%, 65%);
+  --cell-size: 80px;
+  --mark-size: calc(var(--cell-size) * 0.9);
+}
+
+body.dark {
   --body-bg: hsl(0, 0%, 12%);
   --container-bg: hsl(0, 0%, 20%);
   --subcontainer-bg: hsl(0, 0%, 12%);
+  --box-shadow: hsl(0, 0%, 10%);
   --button-bg: hsl(0, 0%, 10%);
   --button-hover-bg: hsl(0, 0%, 15%);
   --outer-button-bg: hsl(0, 0%, 25%);
   --outer-button-hover-bg: hsl(0, 0%, 20%);
-  --input-bg: hsl(0, 0%, 40%);
-  --input-hover-bg: hsl(0, 0%, 45%);
+  --input-bg: hsl(0, 0%, 30%);
+  --input-hover-bg: hsl(0, 0%, 35%);
   --input-color: hsl(0, 0%, 90%);
   --input-placeholder: hsl(0, 0%, 65%);
   --text-color: hsl(0, 0%, 95%);
   --error-color: hsl(0, 100%, 78%);
   --chat-button-bg: hsl(200, 80%, 45%);
   --chat-button-hover-bg: hsl(200, 80%, 55%);
-  --message-bg: hsl(260, 80%, 35%);
+  --message-bg: hsl(260, 80%, 37%);
   --user-message-bg: hsl(200, 80%, 35%);
   --winning-message-bg: hsla(0, 0%, 0%, 0.8);
   --winning-button-text: hsl(0, 0%, 00%);
@@ -54,8 +85,6 @@ body {
   --board-bg: hsl(0, 0%, 25%);
   --board-border: hsl(0, 0%, 45%);
   --mark-shadow-color: hsl(0, 0%, 35%);
-  --cell-size: 80px;
-  --mark-size: calc(var(--cell-size) * 0.9);
 }
 
 @include tablet {

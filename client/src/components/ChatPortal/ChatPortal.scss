@@ -16,6 +16,7 @@
   flex-direction: column;
   justify-content: space-between;
   background-color: var(--container-bg);
+  box-shadow: 2px 2px 8px 2px var(--box-shadow);
 
   @include only-small {
     padding: 24px 12px;
@@ -34,8 +35,8 @@
     align-items: center;
     user-select: none;
     z-index: 1;
-    color: var(--body-bg);
-    background-color: var(--text-color);
+    color: var(--chat-button-text);
+    background-color: var(--chat-button-bg);
 
     @include only-small {
       top: 8px;
@@ -46,7 +47,7 @@
     }
 
     &:hover {
-      background-color: var(--input-color);
+      background-color: var(--chat-button-hover-bg);
     }
   }
 

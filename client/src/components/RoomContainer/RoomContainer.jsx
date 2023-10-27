@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useAppContext } from '../../context/useAppContext';
 import { socket } from '../../socket';
-import { ACTIONS, ERRORS } from '../../utils/constants';
+import { Icon } from '../Icon';
+import { useAppContext } from '../../context/useAppContext';
+import { ACTIONS, ERRORS, ICONS } from '../../utils/constants';
 import './RoomContainer.scss';
 
 export function RoomContainer() {
   const { state, dispatch } = useAppContext();
-  const { error, room, user } = state;
+  const { darkTheme, error, room, user } = state;
   const [roomId, setRoomId] = useState('');
 
   const handleSubmit = (event) => {
@@ -30,6 +31,10 @@ export function RoomContainer() {
     setRoomId(event.target.value);
 
     if (error.type !== '') dispatch({ type: ACTIONS.CLEAN_ERROR });
+  };
+
+  const handleClick = () => {
+    dispatch({ type: ACTIONS.TOGGLE_DARK_THEME });
   };
 
   return (
@@ -72,6 +77,16 @@ export function RoomContainer() {
             Room not found. 😥 <br /> Try with a different ID.
           </span>
         ) : null}
+      </div>
+
+      <div className="RoomContainer--theme-button-container">
+        <button
+          className="RoomContainer--theme-button"
+          type="button"
+          onClick={handleClick}
+        >
+          <Icon name={darkTheme ? ICONS.Moon : ICONS.Sun} />
+        </button>
       </div>
     </div>
   );
