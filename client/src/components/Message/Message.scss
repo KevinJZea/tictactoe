@@ -20,12 +20,13 @@
     text-align: start;
     text-overflow: ellipsis;
     word-wrap: break-word;
-    
+    box-shadow: 2px 2px 4px var(--box-shadow);
+
     @include only-small {
       padding: 8px 14px;
       font-size: 0.9rem;
     }
-    
+
     &.same-user {
       background-color: var(--user-message-bg);
       text-align: end;

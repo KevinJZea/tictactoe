@@ -12,6 +12,7 @@
   user-select: none;
   color: var(--text-color);
   background-color: var(--chat-button-bg);
+  box-shadow: 4px 4px 8px 2px var(--box-shadow);
   
   &:hover {
     background-color: var(--chat-button-hover-bg);
