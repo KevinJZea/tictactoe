@@ -16,7 +16,7 @@ const LoginForm = lazy(() =>
 
 export function App() {
   const { state, dispatch } = useAppContext();
-  const { error, rival, selectedCells, turn, user } = state;
+  const { darkTheme, error, rival, selectedCells, turn, user } = state;
 
   const onInitializeRoom = useCallback(
     (roomData) => {
@@ -115,6 +115,13 @@ export function App() {
 
     dispatch({ type: ACTIONS.SWITCH_TURNS });
   }, [selectedCells]);
+
+  useEffect(() => {
+    document.body.classList.toggle('dark', darkTheme);
+    return () => {
+      document.body.classList.remove('dark');
+    };
+  }, [darkTheme]);
 
   return (
     <Suspense fallback={<h2>Loading...</h2>}>
