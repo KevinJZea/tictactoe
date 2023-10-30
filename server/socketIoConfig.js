@@ -33,10 +33,11 @@ export function socketIoConfig(socket) {
 
   socket.on('client:newMessage', (messageData) => {
     const newMessage = {
-      ...messageData,
+      content: messageData.content,
       id: createRandomId(),
+      sender: { ...messageData.sender },
     };
-    socket.broadcast.emit('server:newMessage', newMessage);
+    socket.to(messageData.room.id).emit('server:newMessage', newMessage);
     socket.emit('server:newMessage', newMessage);
   });
 

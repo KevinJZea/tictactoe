@@ -11,7 +11,7 @@ const Message = lazy(() =>
 
 export function ChatPortal() {
   const { state, dispatch } = useAppContext();
-  const { isChatOpen, messages, user } = state;
+  const { isChatOpen, messages, room, user } = state;
 
   const [messageContent, setMessageContent] = useState('');
 
@@ -20,7 +20,7 @@ export function ChatPortal() {
   };
 
   const addMessage = (content) => {
-    socket.emit('client:newMessage', { sender: user.username, content });
+    socket.emit('client:newMessage', { sender: { ...user }, content, room });
   };
 
   const handleSubmit = (event) => {
@@ -49,8 +49,8 @@ export function ChatPortal() {
             <Message
               key={message.id}
               content={message.content}
-              sender={message.sender}
-              isSameUser={message.sender === user.username}
+              sender={message.sender.username}
+              isSameUser={message.sender.id === user.id}
             />
           ))}
         </Suspense>
