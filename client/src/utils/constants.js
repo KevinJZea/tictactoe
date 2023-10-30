@@ -45,6 +45,7 @@ export const WINNING_COMBINATIONS = [
 export const ICONS = {
   MessageCircle: 'message-circle',
   Moon: 'moon',
+  Send: 'send',
   Sun: 'sun',
   X: 'x',
 };
