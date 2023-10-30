@@ -71,11 +71,13 @@ export function ChatPortal() {
           onChange={handleChange}
         />
 
-        <input
+        <button
           className="ChatPortal--submit-button"
           type="submit"
           value="Send"
-        />
+        >
+          <Icon name={ICONS.Send} />
+        </button>
       </form>
     </div>
   );
