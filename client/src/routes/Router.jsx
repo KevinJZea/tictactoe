@@ -10,11 +10,16 @@ const LoginForm = lazy(() =>
     default: module.LoginForm,
   }))
 );
+const NotFound = lazy(() =>
+  import('../pages/NotFound').then((module) => ({
+    default: module.NotFound,
+  }))
+);
 
 const routes = [
   { path: ROUTES.HOME, element: <Home /> },
   { path: ROUTES.LOGIN, element: <LoginForm /> },
-  { path: ROUTES.NOT_FOUND, element: <h2>Not Found</h2> },
+  { path: ROUTES.NOT_FOUND, element: <NotFound /> },
 ];
 
 export function Router() {
