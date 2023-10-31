@@ -1,13 +1,16 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { socket } from '../../socket';
 import './LoginForm.scss';
 
 export function LoginForm() {
   const [username, setUsername] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     socket.emit('client:userConnected', username);
+    setTimeout(() => navigate('/'), 100);
   };
 
   const handleChange = (event) => {

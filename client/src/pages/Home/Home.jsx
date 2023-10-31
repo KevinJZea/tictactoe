@@ -1,4 +1,6 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { ChatButton } from '../../components/ChatButton';
 import { ChatPortal } from '../../components/ChatPortal';
 import { RoomContainer } from '../../components/RoomContainer';
@@ -26,7 +28,13 @@ const WinningMessage = lazy(() =>
 
 export function Home() {
   const { state } = useAppContext();
-  const { draw, rival, winner } = state;
+  const { draw, rival, user, winner } = state;
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user.username) navigate('/login');
+  }, [navigate, user]);
 
   return (
     <main className="Home--main-container">

@@ -19,3 +19,6 @@ io.on('connection', socketIoConfig);
 httpServer.listen(PORT);
 
 app.use(express.static(join(__dirname, '../client/dist')));
+app.use('*', (_, res) => {
+  res.sendFile(join(__dirname, '../client/dist', 'index.html'));
+});

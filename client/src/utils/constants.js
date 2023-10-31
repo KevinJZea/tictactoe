@@ -49,3 +49,9 @@ export const ICONS = {
   Sun: 'sun',
   X: 'x',
 };
+
+export const ROUTES = {
+  HOME: '/',
+  LOGIN: 'login',
+  NOT_FOUND: '*',
+};
