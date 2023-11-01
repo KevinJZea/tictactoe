@@ -1,12 +1,26 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ChatButton } from '../../components/ChatButton';
-import { ChatPortal } from '../../components/ChatPortal';
-import { RoomContainer } from '../../components/RoomContainer';
-
 import { useAppContext } from '../../context/useAppContext';
 import './Home.scss';
+
+const ChatButton = lazy(() =>
+  import('../../components/ChatButton').then((module) => ({
+    default: module.ChatButton,
+  }))
+);
+
+const ChatPortal = lazy(() =>
+  import('../../components/ChatPortal').then((module) => ({
+    default: module.ChatPortal,
+  }))
+);
+
+const RoomContainer = lazy(() =>
+  import('../../components/RoomContainer').then((module) => ({
+    default: module.RoomContainer,
+  }))
+);
 
 const ScoreBoard = lazy(() =>
   import('../../components/ScoreBoard').then((module) => ({
@@ -36,7 +50,7 @@ export function Home() {
     if (!user.username) navigate('/login');
   }, [navigate, user]);
 
-  return (
+  return user.username ? (
     <main className="Home--main-container">
       <RoomContainer />
 
@@ -51,5 +65,5 @@ export function Home() {
 
       <ChatButton />
     </main>
-  );
+  ) : null;
 }

@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ROUTES } from '../utils/constants';
 
@@ -25,14 +25,16 @@ const routes = [
 export function Router() {
   return (
     <BrowserRouter>
-      <Routes>
-        {routes.map((route) => (
-          <Route
-            key={route.path}
-            {...route}
-          />
-        ))}
-      </Routes>
+      <Suspense fallback={<h3>Loading...</h3>}>
+        <Routes>
+          {routes.map((route) => (
+            <Route
+              key={route.path}
+              {...route}
+            />
+          ))}
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }
