@@ -5,9 +5,9 @@ import { ROUTES } from '../utils/constants';
 const Home = lazy(() =>
   import('../pages/Home').then((module) => ({ default: module.Home }))
 );
-const LoginForm = lazy(() =>
-  import('../components/LoginForm').then((module) => ({
-    default: module.LoginForm,
+const Login = lazy(() =>
+  import('../pages/Login').then((module) => ({
+    default: module.Login,
   }))
 );
 const NotFound = lazy(() =>
@@ -18,7 +18,7 @@ const NotFound = lazy(() =>
 
 const routes = [
   { path: ROUTES.HOME, element: <Home /> },
-  { path: ROUTES.LOGIN, element: <LoginForm /> },
+  { path: ROUTES.LOGIN, element: <Login /> },
   { path: ROUTES.NOT_FOUND, element: <NotFound /> },
 ];
 
