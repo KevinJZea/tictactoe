@@ -10,6 +10,11 @@ const Login = lazy(() =>
     default: module.Login,
   }))
 );
+const Menu = lazy(() =>
+  import('../pages/RivalMenu').then((module) => ({
+    default: module.RivalMenu,
+  }))
+);
 const NotFound = lazy(() =>
   import('../pages/NotFound').then((module) => ({
     default: module.NotFound,
@@ -19,6 +24,7 @@ const NotFound = lazy(() =>
 const routes = [
   { path: ROUTES.HOME, element: <Home /> },
   { path: ROUTES.LOGIN, element: <Login /> },
+  { path: ROUTES.MENU, element: <Menu /> },
   { path: ROUTES.NOT_FOUND, element: <NotFound /> },
 ];
 

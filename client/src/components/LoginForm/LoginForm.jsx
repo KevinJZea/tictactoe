@@ -10,7 +10,7 @@ export function LoginForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     socket.emit('client:userConnected', username);
-    setTimeout(() => navigate('/'), 100);
+    setTimeout(() => navigate('/menu'), 100);
   };
 
   const handleChange = (event) => {

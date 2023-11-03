@@ -53,5 +53,6 @@ export const ICONS = {
 export const ROUTES = {
   HOME: '/',
   LOGIN: 'login',
+  MENU: 'menu',
   NOT_FOUND: '*',
 };

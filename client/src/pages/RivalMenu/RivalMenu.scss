@@ -1,0 +1,40 @@
+@import '../../sass';
+
+.RivalMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+
+  &--container {
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+
+    @include only-small {
+      gap: 2rem;
+    }
+  }
+
+  &--title {
+    font-size: 2rem;
+
+    @include only-small {
+      font-size: 1.6rem;
+    }
+
+    @include tablet {
+      font-size: 2.5rem;
+    }
+  }
+
+  &--item {
+    list-style: none;
+    width: 80%;
+  }
+}
