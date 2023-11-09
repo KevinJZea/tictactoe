@@ -1,0 +1,1 @@
+export { GameMenuCard } from './GameMenuCard';

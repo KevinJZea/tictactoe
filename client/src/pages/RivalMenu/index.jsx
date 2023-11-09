@@ -1,1 +1,0 @@
-export { RivalMenu } from './RivalMenu';

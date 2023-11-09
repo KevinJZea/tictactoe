@@ -3,8 +3,8 @@ import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
 import { AppRoute } from '../context/AppRoute';
 import { GAME_ROUTES, ROUTES } from '../utils/constants';
 
-const Home = lazy(() =>
-  import('../pages/Home').then((module) => ({ default: module.Home }))
+const Game = lazy(() =>
+  import('../pages/Game').then((module) => ({ default: module.Game }))
 );
 const Login = lazy(() =>
   import('../pages/Login').then((module) => ({
@@ -12,8 +12,8 @@ const Login = lazy(() =>
   }))
 );
 const Menu = lazy(() =>
-  import('../pages/RivalMenu').then((module) => ({
-    default: module.RivalMenu,
+  import('../pages/GameMenu').then((module) => ({
+    default: module.GameMenu,
   }))
 );
 const NotFound = lazy(() =>
@@ -24,7 +24,7 @@ const NotFound = lazy(() =>
 
 const gameRoutes = [
   { index: true, element: <Menu /> },
-  { path: GAME_ROUTES.FRIEND, element: <Home /> },
+  { path: GAME_ROUTES.FRIEND, element: <Game /> },
 ];
 const gameChildren = gameRoutes.map((route) => (
   <Route

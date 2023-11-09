@@ -1,8 +1,8 @@
 import { useAppContext } from '../../context/useAppContext';
-import { RivalMenuCard } from '../../components/RivalMenuCard';
-import './RivalMenu.scss';
+import { GameMenuCard } from '../../components/GameMenuCard';
+import './GameMenu.scss';
 
-const rivalMenuCards = [
+const gameMenuCards = [
   {
     to: '/game/cpu',
     title: 'CPU',
@@ -23,22 +23,22 @@ const rivalMenuCards = [
   },
 ];
 
-export function RivalMenu() {
+export function GameMenu() {
   const { state } = useAppContext();
 
   return (
-    <main className="RivalMenu--container">
-      <div className="RivalMenu--titles-container">
-        <h1 className="RivalMenu--title">Welcome, {state.user.username}!</h1>
-        <h2 className="RivalMenu--subtitle">Who do you want to play with?</h2>
+    <main className="GameMenu--container">
+      <div className="GameMenu--titles-container">
+        <h1 className="GameMenu--title">Welcome, {state.user.username}!</h1>
+        <h2 className="GameMenu--subtitle">Who do you want to play with?</h2>
       </div>
-      <menu className="RivalMenu">
-        {rivalMenuCards.map((rivalMenuCard) => (
+      <menu className="GameMenu">
+        {gameMenuCards.map((gameMenuCard) => (
           <li
-            className="RivalMenu--item"
-            key={rivalMenuCard.to}
+            className="GameMenu--item"
+            key={gameMenuCard.to}
           >
-            <RivalMenuCard {...rivalMenuCard} />
+            <GameMenuCard {...gameMenuCard} />
           </li>
         ))}
       </menu>

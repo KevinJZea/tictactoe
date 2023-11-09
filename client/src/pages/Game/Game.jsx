@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { useAppContext } from '../../context/useAppContext';
-import './Home.scss';
+import './Game.scss';
 
 const ChatButton = lazy(() =>
   import('../../components/ChatButton').then((module) => ({
@@ -38,12 +38,12 @@ const WinningMessage = lazy(() =>
   }))
 );
 
-export function Home() {
+export function Game() {
   const { state } = useAppContext();
   const { draw, rival, winner } = state;
 
   return (
-    <main className="Home--main-container">
+    <main className="Game--main-container">
       <RoomContainer />
 
       <Suspense fallback={<h3>Loading...</h3>}>

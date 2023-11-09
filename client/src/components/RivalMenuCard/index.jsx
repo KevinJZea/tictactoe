@@ -1,1 +1,0 @@
-export { RivalMenuCard } from './RivalMenuCard';
