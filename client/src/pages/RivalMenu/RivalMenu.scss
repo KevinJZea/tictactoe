@@ -21,8 +21,13 @@
     }
   }
 
+  &--title, &--subtitle {
+    margin: 0;
+  }
+
   &--title {
     font-size: 2rem;
+    margin-bottom: 1rem;
 
     @include only-small {
       font-size: 1.6rem;
@@ -30,6 +35,18 @@
 
     @include tablet {
       font-size: 2.5rem;
+    }
+  }
+
+  &--subtitle {
+    font-size: 1.8rem;
+
+    @include only-small {
+      font-size: 1.4rem;
+    }
+
+    @include tablet {
+      font-size: 2.2rem;
     }
   }
 

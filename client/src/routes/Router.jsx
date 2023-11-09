@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { ROUTES } from '../utils/constants';
+import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom';
+import { AppRoute } from '../context/AppRoute';
+import { GAME_ROUTES, ROUTES } from '../utils/constants';
 
 const Home = lazy(() =>
   import('../pages/Home').then((module) => ({ default: module.Home }))
@@ -21,12 +22,31 @@ const NotFound = lazy(() =>
   }))
 );
 
+const gameRoutes = [
+  { index: true, element: <Menu /> },
+  { path: GAME_ROUTES.FRIEND, element: <Home /> },
+];
+const gameChildren = gameRoutes.map((route) => (
+  <Route
+    {...route}
+    key={`game-${route.path || 'index'}`}
+    element={<AppRoute>{route.element}</AppRoute>}
+  />
+));
+
 const routes = [
-  { path: ROUTES.HOME, element: <Home /> },
+  { index: true, element: null },
   { path: ROUTES.LOGIN, element: <Login /> },
-  { path: ROUTES.MENU, element: <Menu /> },
+  { path: ROUTES.GAME, children: gameChildren, element: <Outlet /> },
   { path: ROUTES.NOT_FOUND, element: <NotFound /> },
 ];
+
+const elementToRender = (routeData) =>
+  routeData.path === ROUTES.LOGIN || routeData.path === ROUTES.NOT_FOUND ? (
+    routeData.element
+  ) : (
+    <AppRoute>{routeData.element}</AppRoute>
+  );
 
 export function Router() {
   return (
@@ -35,9 +55,12 @@ export function Router() {
         <Routes>
           {routes.map((route) => (
             <Route
-              key={route.path}
               {...route}
-            />
+              key={`${route.path || 'index'}`}
+              element={elementToRender(route)}
+            >
+              {route.children}
+            </Route>
           ))}
         </Routes>
       </Suspense>

@@ -52,7 +52,13 @@ export const ICONS = {
 
 export const ROUTES = {
   HOME: '/',
-  LOGIN: 'login',
-  MENU: 'menu',
+  GAME: '/game',
+  LOGIN: '/login',
   NOT_FOUND: '*',
+};
+
+export const GAME_ROUTES = {
+  CPU: 'cpu',
+  FRIEND: 'friend',
+  RANDOM: 'random',
 };

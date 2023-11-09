@@ -1,3 +1,4 @@
+import { useAppContext } from '../../context/useAppContext';
 import { RivalMenuCard } from '../../components/RivalMenuCard';
 import './RivalMenu.scss';
 
@@ -23,9 +24,14 @@ const rivalMenuCards = [
 ];
 
 export function RivalMenu() {
+  const { state } = useAppContext();
+
   return (
     <main className="RivalMenu--container">
-      <h1 className="RivalMenu--title">Who do you want to play with?</h1>
+      <div className="RivalMenu--titles-container">
+        <h1 className="RivalMenu--title">Welcome, {state.user.username}!</h1>
+        <h2 className="RivalMenu--subtitle">Who do you want to play with?</h2>
+      </div>
       <menu className="RivalMenu">
         {rivalMenuCards.map((rivalMenuCard) => (
           <li

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { socket } from '../../socket';
+import { ROUTES } from '../../utils/constants';
 import './LoginForm.scss';
 
 export function LoginForm() {
@@ -10,7 +11,7 @@ export function LoginForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     socket.emit('client:userConnected', username);
-    setTimeout(() => navigate('/menu'), 100);
+    setTimeout(() => navigate(ROUTES.GAME), 150);
   };
 
   const handleChange = (event) => {
