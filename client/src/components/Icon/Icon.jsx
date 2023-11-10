@@ -1,5 +1,4 @@
 import { lazy } from 'react';
-
 import { ICONS } from '../../utils/constants';
 
 import './Icon.scss';
