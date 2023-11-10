@@ -1,15 +1,10 @@
 @import '../../sass';
 
 .ScoreBoard {
+  padding: 0 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  column-gap: 40px;
-
-  @include tablet {
-    column-gap: 60px;
-  }
 
   &--main-container {
     width: 100%;
