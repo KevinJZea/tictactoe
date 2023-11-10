@@ -1,18 +1,10 @@
-import { useEffect, useCallback, lazy, Suspense } from 'react';
+import { useEffect, useCallback, Suspense } from 'react';
 import { socket } from './socket';
+import { Router } from './routes/Router';
 
 import { useAppContext } from './context/useAppContext';
 import { ACTIONS, ERRORS } from './utils/constants';
 import { checkWin } from './utils/helpers';
-
-const Home = lazy(() =>
-  import('./pages/Home').then((module) => ({ default: module.Home }))
-);
-const LoginForm = lazy(() =>
-  import('./components/LoginForm').then((module) => ({
-    default: module.LoginForm,
-  }))
-);
 
 export function App() {
   const { state, dispatch } = useAppContext();
@@ -125,7 +117,7 @@ export function App() {
 
   return (
     <Suspense fallback={<h2>Loading...</h2>}>
-      {!user.username ? <LoginForm /> : <Home />}
+      <Router />
     </Suspense>
   );
 }

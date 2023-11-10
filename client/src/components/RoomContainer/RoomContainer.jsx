@@ -7,7 +7,7 @@ import './RoomContainer.scss';
 
 export function RoomContainer() {
   const { state, dispatch } = useAppContext();
-  const { darkTheme, error, room, user } = state;
+  const { darkTheme, error, rival, room, user } = state;
   const [roomId, setRoomId] = useState('');
 
   const handleSubmit = (event) => {
@@ -40,43 +40,51 @@ export function RoomContainer() {
   return (
     <div className="RoomContainer">
       <p className="RoomContainer--info">
-        <span className="RoomContainer--room-text">Room ID:</span>
-        <span className="RoomContainer--room-id">{room.id}</span>
+        {rival.id ? null : (
+          <>
+            <span className="RoomContainer--room-text">Room ID:</span>
+            <span className="RoomContainer--room-id">{room.id}</span>
+          </>
+        )}
       </p>
 
       <div className="RoomContainer--form-container">
-        <form
-          className="RoomContainer--form"
-          onSubmit={handleSubmit}
-        >
-          <input
-            className="RoomContainer--input"
-            maxLength={6}
-            minLength={6}
-            name="roomId"
-            placeholder="Type a room ID..."
-            required
-            type="text"
-            value={roomId}
-            onChange={handleChange}
-          />
-          <input
-            className="RoomContainer--submit"
-            type="submit"
-            value="Join Room"
-          />
-        </form>
+        {rival.id ? null : (
+          <>
+            <form
+              className="RoomContainer--form"
+              onSubmit={handleSubmit}
+            >
+              <input
+                className="RoomContainer--input"
+                maxLength={6}
+                minLength={6}
+                name="roomId"
+                placeholder="Type a room ID..."
+                required
+                type="text"
+                value={roomId}
+                onChange={handleChange}
+              />
+              <input
+                className="RoomContainer--submit"
+                type="submit"
+                value="Join Room"
+              />
+            </form>
 
-        {error.type === ERRORS.ROOM_FULL ? (
-          <span className="RoomContainer--room-error-message">
-            Full room. 😥 <br /> Try with a different room.
-          </span>
-        ) : null}
-        {error.type === ERRORS.ROOM_NOT_FOUND ? (
-          <span className="RoomContainer--room-error-message">
-            Room not found. 😥 <br /> Try with a different ID.
-          </span>
-        ) : null}
+            {error.type === ERRORS.ROOM_FULL ? (
+              <span className="RoomContainer--room-error-message">
+                Full room. 😥 <br /> Try with a different room.
+              </span>
+            ) : null}
+            {error.type === ERRORS.ROOM_NOT_FOUND ? (
+              <span className="RoomContainer--room-error-message">
+                Room not found. 😥 <br /> Try with a different ID.
+              </span>
+            ) : null}
+          </>
+        )}
       </div>
 
       <div className="RoomContainer--theme-button-container">
