@@ -49,3 +49,16 @@ export const ICONS = {
   Sun: 'sun',
   X: 'x',
 };
+
+export const ROUTES = {
+  HOME: '/',
+  GAME: '/game',
+  LOGIN: '/login',
+  NOT_FOUND: '*',
+};
+
+export const GAME_ROUTES = {
+  CPU: 'cpu',
+  FRIEND: 'friend',
+  RANDOM: 'random',
+};
