@@ -82,6 +82,12 @@ const reducer = (state = initialState, action) => {
         selectedCells: { ...initialState.selectedCells },
       };
 
+    case ACTIONS.CLEAN_WINNER:
+      return {
+        ...state,
+        winner: initialState.winner,
+      };
+
     case ACTIONS.CLOSE_CHAT:
       return { ...state, isChatOpen: false };
 
@@ -113,10 +119,10 @@ const reducer = (state = initialState, action) => {
     case ACTIONS.NO_NEW_MESSAGES:
       return { ...state, newMessages: initialState.newMessages };
 
-    case ACTIONS.RESTART_GAME:
+    case ACTIONS.RESTART_TURN:
       return {
         ...state,
-        winner: initialState.winner,
+        turn: initialState.turn,
       };
 
     case ACTIONS.RIVAL_ABANDONED:
