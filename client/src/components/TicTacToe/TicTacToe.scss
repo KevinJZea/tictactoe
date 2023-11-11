@@ -56,6 +56,8 @@
     width: var(--cell-size);
     height: var(--cell-size);
     border: 1px solid var(--board-border);
+    background-color: var(--board-bg);
+    border-radius: 0;
     display: flex;
     justify-content: center;
     align-items: center;

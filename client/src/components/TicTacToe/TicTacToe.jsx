@@ -43,9 +43,10 @@ function TicTacToeCell({ index, mark }) {
   }, [dispatch, room.id, turn, user]);
 
   return (
-    <div
+    <button
       className={`TicTacToe--cell ${mark}`}
+      type="button"
       onClick={handleClick}
-    ></div>
+    ></button>
   );
 }
