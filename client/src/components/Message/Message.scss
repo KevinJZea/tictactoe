@@ -6,10 +6,27 @@
 
   &.same-user {
     justify-content: flex-end;
+
+    .Message--text-content {
+      background-color: var(--user-message-bg);
+      text-align: end;
+    }
+  }
+
+  &.server {
+    justify-content: center;
+
+    .Message--text-content {
+      width: 90%;
+      text-align: center;
+      padding: 6px;
+      background-color: var(--container-bg);
+      font-weight: 600;
+    }
   }
 
   &--text-content {
-    padding: 12px 20px;
+    padding: 8px 16px;
     width: fit-content;
     max-width: 90%;
     background-color: var(--message-bg);
@@ -26,13 +43,9 @@
       padding: 8px 14px;
       font-size: 0.9rem;
     }
-    &.same-user {
-      background-color: var(--user-message-bg);
-      text-align: end;
-    }
   }
 
   &--text-sender {
-    font-weight: bold;
+    font-weight: 600;
   }
 }
