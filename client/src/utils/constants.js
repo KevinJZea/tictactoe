@@ -9,6 +9,7 @@ export const ACTIONS = {
   INCREASE_USER_SCORE: 'increase-user-score',
   INCREASE_RIVAL_SCORE: 'increase-rival-score',
   NEW_MESSAGE: 'new-message',
+  NO_NEW_MESSAGES: 'new-messages',
   RESTART_GAME: 'restart-game',
   ROOM_FULL: 'room-full',
   ROOM_NOT_FOUND: 'room-not-found',

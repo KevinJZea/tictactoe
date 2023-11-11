@@ -46,6 +46,7 @@ body {
   --error-color: hsl(0, 100%, 22%);
   --chat-button-bg: hsl(200, 70%, 55%);
   --chat-button-hover-bg: hsl(200, 70%, 45%);
+  --new-message-notification-bg:hsl(0, 92%, 71%);
   --message-bg: hsl(260, 70%, 73%);
   --user-message-bg: hsl(200, 80%, 65%);
   --winning-message-bg: hsla(0, 0%, 100%, 0.8);
@@ -76,6 +77,7 @@ body.dark {
   --error-color: hsl(0, 100%, 78%);
   --chat-button-bg: hsl(200, 80%, 45%);
   --chat-button-hover-bg: hsl(200, 80%, 55%);
+  --new-message-notification-bg:hsl(0, 70%, 37%);
   --message-bg: hsl(260, 80%, 37%);
   --user-message-bg: hsl(200, 80%, 35%);
   --winning-message-bg: hsla(0, 0%, 0%, 0.8);
