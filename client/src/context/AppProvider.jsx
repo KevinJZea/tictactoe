@@ -77,7 +77,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         cells: { ...initialState.cells },
-        draw: false,
+        draw: initialState.draw,
         selectedCells: { ...initialState.selectedCells },
       };
 
@@ -109,6 +109,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         winner: initialState.winner,
+      };
+
+    case ACTIONS.RIVAL_ABANDONED:
+      return {
+        ...state,
+        rival: { ...initialState.rival },
+        user: { ...state.user, ...initialState.user },
       };
 
     case ACTIONS.ROOM_NOT_FOUND:

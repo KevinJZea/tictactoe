@@ -1,8 +1,10 @@
 import { createRandomId } from './helpers.js';
 
 export function socketIoConfig(socket) {
+  let currentRoomId = createRandomId();
+
   socket.emit('server:initializeRoom', {
-    id: createRandomId(),
+    id: currentRoomId,
   });
 
   socket.on('client:joinRoom', (roomId) => {
@@ -17,6 +19,7 @@ export function socketIoConfig(socket) {
     if (usersInRoom === 2) return socket.emit('server:error:roomFull');
 
     socket.leave(prevRoomId);
+    currentRoomId = roomId;
     socket.emit('server:initializeRoom', {
       id: roomId,
     });
@@ -49,5 +52,9 @@ export function socketIoConfig(socket) {
 
   socket.on('client:cellSelected', (roomId, index, turn) => {
     socket.to(roomId).emit('server:cellSelected', index, turn);
+  });
+
+  socket.on('disconnect', () => {
+    socket.to(currentRoomId).emit('server:rivalAbandoned');
   });
 }
