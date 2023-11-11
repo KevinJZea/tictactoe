@@ -8,8 +8,8 @@
   right: 5vw;
   z-index: 2;
 
-  border-radius: 12px;
-  padding: 40px 20px;
+  border-radius: 8px;
+  padding: 40px;
   display: flex;
   gap: 20px;
   align-items: center;
@@ -19,16 +19,17 @@
   box-shadow: 2px 2px 8px 2px var(--box-shadow);
 
   @include only-small {
-    padding: 24px 12px;
+    padding: 24px;
     gap: 16px;
   }
 
   &--exit-button {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
+    padding: 0;
+    top: 4px;
+    right: 4px;
+    width: 40px;
+    height: 40px;
     font-size: 1.2rem;
     border-radius: 50%;
     display: flex;
@@ -37,24 +38,24 @@
     user-select: none;
     z-index: 1;
     color: var(--chat-button-text);
-    background-color: var(--chat-button-bg);
+    background: transparent;
 
     @include only-small {
-      top: 8px;
-      right: 8px;
-      width: 44px;
-      height: 44px;
+      top: 0;
+      right: 0;
+      width: 28px;
+      height: 28px;
       font-size: 1rem;
     }
 
     &:hover {
-      background-color: var(--chat-button-hover-bg);
+      opacity: 0.8;
     }
   }
 
   &--messages-container {
     padding: 16px 24px;
-    width: 90%;
+    width: 100%;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
