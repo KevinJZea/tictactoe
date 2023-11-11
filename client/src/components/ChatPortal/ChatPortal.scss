@@ -11,7 +11,7 @@
   border-radius: 12px;
   padding: 40px 20px;
   display: flex;
-  gap: 32px;
+  gap: 20px;
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
@@ -20,6 +20,7 @@
 
   @include only-small {
     padding: 24px 12px;
+    gap: 16px;
   }
 
   &--exit-button {
@@ -72,21 +73,22 @@
   &--form-container {
     display: flex;
     justify-content: center;
-    gap: 32px;
+    align-items: center;
+    gap: 20px;
     width: 90%;
 
     @include only-small {
-      flex-direction: column;
-      gap: 16px;
+      gap: 12px;
     }
   }
 
   &--input {
-    flex-grow: 1;
     padding: 8px 16px;
     font-size: 1.2rem;
     border: none;
     border-radius: 8px;
+    height: 80%;
+    width: 100%;
     color: var(--text-color);
     background-color: var(--input-bg);
 
@@ -120,6 +122,8 @@
     @include only-small {
       padding: 12px 16px;
       font-size: 1.2rem;
+      width: 40px;
+      height: 40px;
     }
 
     &:hover {

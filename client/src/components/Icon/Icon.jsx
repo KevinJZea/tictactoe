@@ -20,5 +20,5 @@ const icons = {
 };
 
 export function Icon({ name }) {
-  return <div className="Icon">{icons[name]}</div>;
+  return <div className={`Icon Icon--${name}`}>{icons[name]}</div>;
 }

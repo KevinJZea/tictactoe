@@ -64,7 +64,7 @@ export function ChatPortal() {
           className="ChatPortal--input"
           id="message"
           name="message"
-          placeholder="Type your message here..."
+          placeholder="Message"
           required
           type="text"
           value={messageContent}
