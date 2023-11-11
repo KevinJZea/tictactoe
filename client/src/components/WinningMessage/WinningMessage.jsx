@@ -8,7 +8,7 @@ export function WinningMessage() {
 
   const handleClick = () => {
     if (draw) return dispatch({ type: ACTIONS.CLEAN_DRAW });
-    dispatch({ type: ACTIONS.RESTART_GAME });
+    dispatch({ type: ACTIONS.CLEAN_WINNER });
   };
 
   return (

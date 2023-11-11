@@ -52,11 +52,11 @@ export function App() {
     dispatch({ type: ACTIONS.UPDATE_RIVAL, payload: { ...host } });
     dispatch({ type: ACTIONS.UPDATE_USER, payload: { ...rival } });
   };
-  
+
   const onRivalAbandoned = () => {
     dispatch({ type: ACTIONS.CLEAN_GAME });
     dispatch({ type: ACTIONS.RIVAL_ABANDONED });
-  }
+  };
 
   const onCellSelected = (selectedCellIndex, turn) => {
     if (selectedCells[turn].includes(selectedCellIndex)) return;
@@ -91,6 +91,8 @@ export function App() {
   }, [onInitializeRoom, onNewRival, onUpdateHostData]);
 
   useEffect(() => {
+    if (!rival.id) return dispatch({ type: ACTIONS.RESTART_TURN });
+
     if (checkWin(selectedCells, turn)) {
       const isUserWinner = user.mark === turn;
 
@@ -113,7 +115,7 @@ export function App() {
     }
 
     dispatch({ type: ACTIONS.SWITCH_TURNS });
-  }, [selectedCells]);
+  }, [selectedCells, rival.id]);
 
   useEffect(() => {
     document.body.classList.toggle('dark', darkTheme);
