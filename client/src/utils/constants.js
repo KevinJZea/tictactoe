@@ -11,6 +11,7 @@ export const ACTIONS = {
   NEW_MESSAGE: 'new-message',
   NO_NEW_MESSAGES: 'new-messages',
   RESTART_GAME: 'restart-game',
+  RIVAL_ABANDONED: 'rival-abandoned',
   ROOM_FULL: 'room-full',
   ROOM_NOT_FOUND: 'room-not-found',
   SWITCH_TURNS: 'switch-turns',
