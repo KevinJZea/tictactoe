@@ -40,6 +40,7 @@ const initialState = {
   error: {},
   isChatOpen: false,
   messages: [],
+  newMessages: 0,
   rival: {
     points: 0,
   },
@@ -77,7 +78,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         cells: { ...initialState.cells },
-        draw: false,
+        draw: initialState.draw,
         selectedCells: { ...initialState.selectedCells },
       };
 
@@ -103,12 +104,26 @@ const reducer = (state = initialState, action) => {
       };
 
     case ACTIONS.NEW_MESSAGE:
-      return { ...state, messages: [...state.messages, action.payload] };
+      return {
+        ...state,
+        messages: [...state.messages, action.payload],
+        newMessages: state.newMessages + 1,
+      };
+
+    case ACTIONS.NO_NEW_MESSAGES:
+      return { ...state, newMessages: initialState.newMessages };
 
     case ACTIONS.RESTART_GAME:
       return {
         ...state,
         winner: initialState.winner,
+      };
+
+    case ACTIONS.RIVAL_ABANDONED:
+      return {
+        ...state,
+        rival: { ...initialState.rival },
+        user: { ...state.user, ...initialState.user },
       };
 
     case ACTIONS.ROOM_NOT_FOUND:

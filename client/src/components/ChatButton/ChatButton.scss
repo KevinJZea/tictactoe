@@ -17,4 +17,21 @@
   &:hover {
     background-color: var(--chat-button-hover-bg);
   }
+  
+  &--new-messages-notification {
+    z-index: 3;
+    position: absolute;
+    bottom: 65%;
+    left: 65%;
+    border-radius: 50%;
+    font-size: 0.6em;
+    height: 28px;
+    width: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    background-color: var(--new-message-notification-bg);
+    color: var(--text-color);
+  }
 }

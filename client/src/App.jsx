@@ -52,6 +52,11 @@ export function App() {
     dispatch({ type: ACTIONS.UPDATE_RIVAL, payload: { ...host } });
     dispatch({ type: ACTIONS.UPDATE_USER, payload: { ...rival } });
   };
+  
+  const onRivalAbandoned = () => {
+    dispatch({ type: ACTIONS.CLEAN_GAME });
+    dispatch({ type: ACTIONS.RIVAL_ABANDONED });
+  }
 
   const onCellSelected = (selectedCellIndex, turn) => {
     if (selectedCells[turn].includes(selectedCellIndex)) return;
@@ -68,6 +73,7 @@ export function App() {
     socket.on('server:newRival', onNewRival);
     socket.on('server:cellSelected', onCellSelected);
     socket.on('server:updateHostData', onUpdateHostData);
+    socket.on('server:rivalAbandoned', onRivalAbandoned);
     socket.on('server:error:roomFull', onRoomFull);
     socket.on('server:error:roomNotFound', onRoomNotFound);
 
@@ -78,6 +84,7 @@ export function App() {
       socket.off('server:newRival', onNewRival);
       socket.off('server:cellSelected', onCellSelected);
       socket.off('server:updateHostData', onUpdateHostData);
+      socket.off('server:rivalAbandoned', onRivalAbandoned);
       socket.off('server:error:roomFull', onRoomFull);
       socket.off('server:error:roomNotFound', onRoomNotFound);
     };
