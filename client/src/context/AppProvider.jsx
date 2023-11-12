@@ -49,6 +49,7 @@ const initialState = {
   user: {
     mark: PLAYERS.CROSS,
     points: 0,
+    username: '',
   },
   winner: '',
 };
