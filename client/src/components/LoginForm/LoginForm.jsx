@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { socket } from '../../socket';
+import { useAppContext } from '../../context/useAppContext';
 import { ROUTES } from '../../utils/constants';
 import './LoginForm.scss';
 
 export function LoginForm() {
-  const [username, setUsername] = useState('');
+  const { state } = useAppContext();
+  const [username, setUsername] = useState(state.user.username);
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {

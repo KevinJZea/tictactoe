@@ -1,5 +1,6 @@
 import { useAppContext } from '../../context/useAppContext';
 import { GameMenuCard } from '../../components/GameMenuCard';
+import { GoBackLink } from '../../components/GoBackLink/GoBackLink';
 import './GameMenu.scss';
 
 const gameMenuCards = [
@@ -28,6 +29,8 @@ export function GameMenu() {
 
   return (
     <main className="GameMenu--container">
+      <GoBackLink to={-1}>Log Out</GoBackLink>
+
       <div className="GameMenu--titles-container">
         <h1 className="GameMenu--title">Welcome, {state.user.username}!</h1>
         <h2 className="GameMenu--subtitle">Who do you want to play with?</h2>
